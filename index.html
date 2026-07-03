@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The First One Hundred — Capsules Founding Creators</title>
+    <title>The First One Hundred — Capsules</title>
     <style>
 
         @import url("https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,300;0,7..72,400;0,7..72,500;0,7..72,600;1,7..72,300;1,7..72,400;1,7..72,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap");
@@ -979,99 +979,140 @@
             margin: 0;
         }
     
-        /* F100-SPECIFIC ADDITIONS */
+        /* F100 ADDITIONS */
 
-        /* Gallery grid — 100 capsule slots */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(10, 1fr);
             gap: clamp(4px, 0.6vw, 8px);
             width: 100%;
-            max-width: 900px;
+            max-width: 780px;
             margin: 0 auto;
         }
 
         .gallery-slot {
             aspect-ratio: 1;
             border-radius: 999px;
-            background: oklab(1 0 0 / 0.06);
-            border: 1px solid oklab(1 0 0 / 0.1);
+            background: oklab(1 0 0 / 0.05);
+            border: 1px solid oklab(1 0 0 / 0.08);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: var(--font-mono);
-            font-size: clamp(0.5rem, 0.7vw, 0.65rem);
-            color: oklab(1 0 0 / 0.2);
             transition: all 0.4s var(--ease-soft);
         }
 
         .gallery-slot.filled {
-            background: oklab(1 0 0 / 0.12);
-            border-color: oklab(1 0 0 / 0.2);
+            background: oklab(1 0 0 / 0.1);
+            border-color: oklab(1 0 0 / 0.18);
         }
 
         .gallery-slot.filled::before {
-            content: "●";
-            font-size: clamp(0.6rem, 1vw, 0.9rem);
-            color: oklab(1 0 0 / 0.4);
+            content: "\25CF";
+            font-size: clamp(0.5rem, 0.9vw, 0.8rem);
+            color: oklab(1 0 0 / 0.35);
         }
 
-        .gallery-slot.empty::before {
-            content: "";
-        }
+        .gallery-slot.empty::before { content: ""; }
 
-        .gallery-slot.highlight {
+        .gallery-slot.claim {
             background: var(--accent-coral-deep);
             border-color: var(--accent-coral-deep);
         }
-        .gallery-slot.highlight::before { color: white; }
+        .gallery-slot.claim::before { content: ""; }
 
-        /* Flywheel diagram */
-        .flywheel {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: clamp(1rem, 2vw, 1.8rem);
-            max-width: 680px;
-            margin: 0 auto;
+        .gallery-slot.claim::after {
+            content: "you?";
+            font-family: var(--font-mono);
+            font-size: clamp(0.4rem, 0.55vw, 0.55rem);
+            color: white;
+            opacity: 0.8;
         }
 
-        .flywheel-step {
-            display: flex;
-            align-items: center;
-            gap: 1.2rem;
-            width: 100%;
+        .perk-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(0.6rem, 1.2vw, 1.2rem);
+            list-style: none;
+            padding: 0;
+            max-width: 760px;
         }
 
-        .flywheel-step .fw-num {
+        .perk-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            font-size: clamp(0.85rem, 1.1vw, 1rem);
+            line-height: 1.5;
+            color: var(--text-on-dark-80);
+            padding: 0.3rem 0;
+        }
+
+        .perk-list li::before {
+            content: "\00B7";
             font-family: var(--font-serif);
-            font-size: clamp(1.8rem, 3vw, 2.4rem);
-            font-weight: 300;
-            font-style: italic;
+            font-size: 1.5rem;
             color: var(--accent-coral-deep);
-            min-width: 2.5rem;
+            line-height: 0.8;
             flex-shrink: 0;
-            line-height: 1;
         }
 
-        .flywheel-step .fw-text {
+        .perk-list li em { font-style: italic; color: var(--text-on-dark); }
+
+        .big-number {
             font-family: var(--font-serif);
-            font-size: clamp(1rem, 1.5vw, 1.3rem);
-            line-height: 1.4;
+            font-size: clamp(6rem, 14vw, 12rem);
+            font-weight: 400;
+            line-height: 0.9;
             color: var(--text-on-dark);
         }
 
-        .flywheel-step .fw-text em {
+        .cta-capsule {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 1.8rem 3rem;
+            border-radius: 999px;
+            background: var(--accent-coral-deep);
+            color: white;
+            font-family: var(--font-serif);
+            font-size: clamp(1.3rem, 2.2vw, 1.8rem);
             font-style: italic;
+            transition: transform 0.3s var(--ease-soft);
+            text-decoration: none;
         }
 
-        .flywheel-arrow {
-            color: oklab(1 0 0 / 0.2);
-            font-size: 1.2rem;
-            margin: -0.5rem 0;
+        .cta-capsule:hover { transform: scale(1.02); }
+
+        .cta-capsule .cta-label {
+            font-family: var(--font-sans);
+            font-style: normal;
+            font-size: clamp(0.65rem, 0.8vw, 0.75rem);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            opacity: 0.65;
         }
 
-        /* Milestone timeline */
+        .code-chip {
+            font-family: var(--font-mono);
+            font-size: clamp(0.7rem, 0.9vw, 0.85rem);
+            font-weight: 400;
+            color: var(--text-on-dark-80);
+            background: oklab(1 0 0 / 0.05);
+            border: 1px solid oklab(1 0 0 / 0.12);
+            border-radius: 999px;
+            padding: 0.5em 1.1em;
+            letter-spacing: 0.03em;
+        }
+
+        .code-examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
         .milestone-row {
             display: flex;
             justify-content: space-between;
@@ -1079,7 +1120,7 @@
             gap: clamp(0.5rem, 1vw, 1rem);
             margin-top: 2rem;
             width: 100%;
-            max-width: 800px;
+            max-width: 720px;
         }
 
         .milestone {
@@ -1091,313 +1132,46 @@
         }
 
         .milestone-dot {
-            width: clamp(12px, 1.5vw, 18px);
-            height: clamp(12px, 1.5vw, 18px);
+            width: clamp(10px, 1.2vw, 16px);
+            height: clamp(10px, 1.2vw, 16px);
             border-radius: 999px;
-            background: oklab(1 0 0 / 0.15);
-            border: 1px solid oklab(1 0 0 / 0.25);
+            background: oklab(1 0 0 / 0.12);
+            border: 1px solid oklab(1 0 0 / 0.2);
         }
 
-        .milestone.active .milestone-dot {
+        .milestone.passed .milestone-dot {
+            background: oklab(1 0 0 / 0.3);
+            border-color: oklab(1 0 0 / 0.35);
+        }
+
+        .milestone.current .milestone-dot {
             background: var(--accent-coral-deep);
             border-color: var(--accent-coral-deep);
+            box-shadow: 0 0 16px oklab(0.62 0.15 25 / 0.4);
         }
 
         .milestone-num {
             font-family: var(--font-serif);
-            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            font-size: clamp(1.3rem, 2.2vw, 1.8rem);
             font-weight: 400;
-            color: var(--text-on-dark);
+            color: oklab(1 0 0 / 0.35);
             line-height: 1;
         }
+
+        .milestone.current .milestone-num { color: var(--accent-coral-deep); }
+        .milestone.passed .milestone-num { color: oklab(1 0 0 / 0.55); }
 
         .milestone-label {
             font-family: var(--font-sans);
-            font-size: clamp(0.6rem, 0.75vw, 0.7rem);
+            font-size: clamp(0.55rem, 0.7vw, 0.65rem);
             text-transform: uppercase;
             letter-spacing: 0.12em;
-            color: var(--text-on-dark-55);
+            color: oklab(1 0 0 / 0.3);
             text-align: center;
-        }
-
-        .milestone.active .milestone-num {
-            color: var(--accent-coral-deep);
-        }
-
-        /* Perk list */
-        .perk-list {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: clamp(0.6rem, 1vw, 1rem);
-            list-style: none;
-            padding: 0;
-        }
-
-        .perk-list li {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.8rem;
-            font-size: clamp(0.85rem, 1.1vw, 1rem);
-            line-height: 1.5;
-            color: var(--text-on-dark-80);
-            padding: 0.4rem 0;
-        }
-
-        .perk-list li::before {
-            content: "·";
-            font-family: var(--font-serif);
-            font-size: 1.5rem;
-            color: var(--accent-coral-deep);
-            line-height: 0.8;
-            flex-shrink: 0;
-        }
-
-        .perk-list li em {
-            font-style: italic;
-            color: var(--text-on-dark);
-        }
-
-        /* Countdown big number */
-        .big-number {
-            font-family: var(--font-serif);
-            font-size: clamp(6rem, 14vw, 12rem);
-            font-weight: 400;
-            line-height: 0.9;
-            color: var(--text-on-dark);
-        }
-
-        .big-number em {
-            font-style: italic;
-        }
-
-        .big-number .accent-period {
-            font-size: 0.8em;
-        }
-
-        /* Unique code display */
-        .code-display {
-            font-family: var(--font-mono);
-            font-weight: 700;
-            letter-spacing: 0.04em;
-            font-size: clamp(1.8rem, 4vw, 3rem);
-            color: var(--accent-coral-deep);
-            line-height: 1;
-            word-break: break-all;
-        }
-
-        /* Code examples row */
-        .code-examples {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            justify-content: center;
-            margin-top: 1.5rem;
-        }
-
-        .code-chip {
-            font-family: var(--font-mono);
-            font-size: clamp(0.7rem, 0.9vw, 0.85rem);
-            font-weight: 400;
-            color: var(--text-on-dark-80);
-            background: oklab(1 0 0 / 0.06);
-            border: 1px solid oklab(1 0 0 / 0.15);
-            border-radius: 999px;
-            padding: 0.5em 1.1em;
-            letter-spacing: 0.03em;
-        }
-
-        /* Channels split */
-        .channels-split {
-            display: flex;
-            gap: clamp(2rem, 4vw, 4rem);
-            margin-top: 1.5rem;
-        }
-
-        .channels-col {
-            flex: 1;
-        }
-
-        .channels-col h3 {
-            font-family: var(--font-sans);
-            font-size: clamp(0.75rem, 0.9vw, 0.85rem);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            font-weight: 500;
-            color: var(--text-55);
-            margin-bottom: 1rem;
-        }
-
-        .channels-col ul {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .channels-col li {
-            font-size: clamp(0.85rem, 1.1vw, 1rem);
-            color: var(--text-80);
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-        }
-
-        .channels-col li::before {
-            content: "+";
-            color: var(--accent-coral-deep);
-            font-weight: 600;
-            font-size: 0.9em;
-        }
-
-        .slide-dark .channels-col h3 {
-            color: var(--text-on-dark-55);
-        }
-
-        .slide-dark .channels-col li {
-            color: var(--text-on-dark-80);
-        }
-
-        /* CTA capsule */
-        .cta-capsule {
-            display: inline-flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.8rem;
-            padding: 2rem 3rem;
-            border-radius: 999px;
-            background: var(--accent-coral-deep);
-            color: white;
-            font-family: var(--font-serif);
-            font-size: clamp(1.5rem, 2.5vw, 2rem);
-            font-style: italic;
-            transition: transform 0.3s var(--ease-soft);
-        }
-
-        .cta-capsule:hover {
-            transform: scale(1.02);
-        }
-
-        .cta-capsule .cta-label {
-            font-family: var(--font-sans);
-            font-style: normal;
-            font-size: clamp(0.7rem, 0.85vw, 0.8rem);
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            opacity: 0.7;
-        }
-
-        /* Invitation card */
-        .invite-card {
-            background: oklab(1 0 0 / 0.06);
-            border-radius: 24px;
-            padding: clamp(2rem, 3.5vw, 3rem);
-            max-width: 640px;
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-        }
-
-        .invite-card .quote-mark {
-            font-family: var(--font-serif);
-            font-size: 3rem;
-            color: var(--accent-coral-deep);
-            line-height: 0.5;
-        }
-
-        .invite-card p {
-            font-family: var(--font-serif);
-            font-size: clamp(1rem, 1.5vw, 1.3rem);
-            font-style: italic;
-            line-height: 1.5;
-            color: var(--text-on-dark);
-        }
-
-        /* Plan grid — like the plan-on-a-page */
-        .plan-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: clamp(1rem, 2vw, 1.8rem);
-            max-width: 900px;
-        }
-
-        .plan-item {
-            display: flex;
-            flex-direction: column;
-            gap: 0.3rem;
-        }
-
-        .plan-label {
-            font-family: var(--font-mono);
-            font-size: clamp(0.6rem, 0.75vw, 0.7rem);
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: var(--text-55);
-            font-weight: 400;
-        }
-
-        .slide-dark .plan-label {
-            color: var(--text-on-dark-55);
-        }
-
-        .plan-value {
-            font-family: var(--font-serif);
-            font-size: clamp(0.9rem, 1.3vw, 1.1rem);
-            line-height: 1.45;
-            color: var(--text-primary);
-            font-weight: 400;
-        }
-
-        .slide-dark .plan-value {
-            color: var(--text-on-dark-80);
-        }
-
-        .plan-value em {
-            font-style: italic;
-        }
-
-        /* Next steps list */
-        .steps-list {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            gap: clamp(0.8rem, 1.5vw, 1.2rem);
-            max-width: 760px;
-        }
-
-        .steps-list li {
-            display: flex;
-            gap: 1.2rem;
-            align-items: baseline;
-        }
-
-        .steps-list .step-num {
-            font-family: var(--font-serif);
-            font-size: clamp(1.3rem, 2vw, 1.8rem);
-            font-weight: 300;
-            font-style: italic;
-            color: var(--accent-coral-deep);
-            min-width: 2.5rem;
-            flex-shrink: 0;
-            line-height: 1;
-        }
-
-        .steps-list .step-content {
-            font-size: clamp(0.9rem, 1.2vw, 1.05rem);
-            line-height: 1.5;
-            color: var(--text-on-dark-80);
-        }
-
-        .steps-list .step-content strong {
-            font-weight: 600;
-            color: var(--text-on-dark);
         }
 
         @media (max-width: 768px) {
             .perk-list { grid-template-columns: 1fr; }
-            .channels-split { flex-direction: column; gap: 1.5rem; }
-            .plan-grid { grid-template-columns: 1fr; }
             .gallery-grid { grid-template-columns: repeat(5, 1fr); }
             .milestone-row { flex-direction: column; gap: 1rem; }
         }
@@ -1405,18 +1179,11 @@
 </head>
 <body>
 
-    <!-- Persistent logo -->
     <div class="deck-logo"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAABrCAYAAAAB1DpKAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAALEBJREFUeAHtnY11FEcSx0tGwGGfn9cR3DgCIAKvIrCIgCUCRASsIkBEgIgAEQEiAkQEHkdg+fkM5jDW1X9ULbdmu6erZ+drpfq9J5Bme2bno6eruro+iAzDMAzDuHZskWEYhmEo+frrr89Sbba2th798ccfh2RMmq/IMAzDMIxrxzZtKN9+++3uX3/9VXz11Vf/4T9nf//99/uPHz8eNO3zzTff3GPNdLa9vX1yypBhGIZhXFM2VgH48uXLKxbmdHZ2bo3i30/4v4PEbs9YUZj/73//gxnrlPc5YjPVIzIMwzCMa8YklwBmjKJZfQaf3IeVhXmtfUGGYRiGcQ2ZjAIAoc+z8qf88yvP0H9W7FJXAIqmxjD/Bza/J8MwDMO4hkxCAWCh/4KF/q/865LOZ+azf//73/PEbif1DaxDFLHGX3311cpnvBxQUgJWHN7xz4umYxuGYRjGpjEVC8CK+Z7N9U8T+/xW3/D58+foMsCXL19WLAA3btw4oQZY8C/4PO7xzwJWCVEENMsThmEYhjFpJqEA8Oz8eX0b1usTwrYM7FM0tL9b34BoAGrmYe34C1L4GhiGYRjG1JmEAvDf//73mFbX9Iln3XuxfVgYr7RHiF+sPX9W1DadNoUCYgmi5jSIYxzyLiUZhmEYxoYziAIQccCr8zyw7adYY7YarAjvJgsATPn+3xI2GOXvv/9+WN928+bNfTIMwzCMK0CvCoB49r9i4QtHuodNbW/duhWK4b/X4Ay4IsBZqP8n1DA3AuBf//pXwf8tase22b9hGIZxZehNAYDgZhP+O/51F3+zEnDQ5EkPczwL2eP6dt5vN9T+y5cvIQvA96G2oQgAbntMEbj9igMin9tLMgzDMIwrQi8KAGbQbEJ/Q5dj82efP39+1eTYx0J2xcTOgvphaJ8///yzDBwiaAEIRQCElhCIorP/Y/FTaETyGPxsIYOGYRjG1OlFAYBwjszm77ESEA3vE6/8lQx/nz59WkR20WYDVEcAhGb/THL2f+fOncd0nseggOVDkcfAMAzDMEajtyUAnnUjx37ITL+HQj6hfWQZYEXYslCOOQOqsgEGIgCCxYBk9j+vbS5TZS2lyJDvw4DiRK/IMAzDMCZKbwoArAA3btwIFtph5SCaWQ8FeurbEI4XceRTZQMMRAAEzf98vnOqKRGhZQkfKA18/FeBY1mRIcMwDGOy9BoF8Pvvvx+xAA2F98Ef4EVoH6y1ZzgDJrMB5kQABLIPNs7+4ZvA1om6rwPYx7WTYRiGYUyU3vMA3Lx5cxmKuZdZ/bPQPmw+fx3Y/DiwrQxsuyTwtREASPtLmbN/ODUG9nn+4cOHJRmGYRjGhFlLAYDQTHm8Y62dTf4PKOIPEHKWu3379mGg/UqBoFA2QFYeLlkAtBEAodk/Ky/HFAEe/4FMgSdsMdgjwzAMw5g4rRUAEYCo4vcmlelPogKCs2kW2Cv+ADFnwLqQ3t7eLuttAumAkxEAkdn/cSzxD66dzj3+faAwPCDDMAzD2ABaKQAi8JfyJ5zg3olQjMIz44OIP0AR8geIOQP6OQFC5Xzr2QCVEQArywuxtL8SwbCsbS5v3bq1Y5kCDcMwjE1hmzKJeb0zS1YMZhCcsSI78AdgiwFC+gp/OwT7nTt39j5+/HgRSgdnQFYqynpbKRC0xO/IBsjmfKod6/va340RAFhWYEWi3iaY9hfXjgiG+nY+h0c5wh9KTFMhok1BlLHZX3/9VcDyguUXLK+4pRlYaDZRKYJFCs6kuCZXX4J/L/E/ro37cXkVnh/AM+RrrZ6fe4abfK2h66n1yZOr8uyMf/DHIvyN93ZTx6Ihx58tygQzYBaCTTHujbNhWA/4IuA5v5K0hx/Yjp9xjxWAJf9XtyycfPjw4b7X5qz+/fz5D953vat9vu876XGbN/W1fD7/H+rnD+Ef8vjnfZ/4iksKJAzih7lEmOCmRQqIsvQjnTtazklZGlmcQPHzFn4VU3oRMXDwoIF+AsX0niiMmus6ddfF/7/WZIqcAhhcPn36tMvnjOc4p4xr5Xvzlt+B4yldq1TtvBbPbioExtwV+L4+SuVPWQeM7TwWzaUf47kXmv2kH2NJ+vUUxiJRWGFVxlL1vD5hbaDqw3CYxzvJ9/qEWpCtAABRAuDBX0SaIAfAk5iA44e3xxcaigCA8nDfaTe4OTzj/7XeyFcUkHq3dh6nLOC/986zrqw84M+r8xKh/rP/IWb/fDMfBc75XeDh7Gs9/vFdfE9eeMrGqVxrSRPGDbD8syClwE8hYZ4v+xwgUsh1PZTw0i6uq8p+KRawkjpAMdCq+h/eI2TTREKturLbks6vNQd5b1FcDNbALp4dBtOjLq5nCsKxiS7Ob6xrFHmA5doFKQV+irHGIhl/nmYorSkqP7tcpaaVDwAEO2seOxQOwwMwlb+K+QXAH4D/CykHSKN7YWLXFAgKJPW5uJmhCABnSgGRtL8rfgoIVwwI/yOt8Mesn7/rXW3w7cSE0xfooLCOoKYDojWoI+EPcB/gQArlDX2kqT5E18Dh07uuBXV3XVgaW3D//ZmP/2KIehABh9cV0PdwTtz2WUfCHwx+rQD9BO+iKO1L6u7Zzca4HkMHFD4eJ17IZHBJHQl/4I9F4gzeK7VxdU7djj+VU37KH8+ndRQAPPsxg4049jmWKAccGuB5X8yyy8A+u/AHcH+kCgTBnFP/3HuBVyIAnKkkVvSnbkqRaIe92mFKOf9GZMB6I2mC/XtwNNXZv7xsr7wO2icF/8Av5F3fLx9ePLzkeEn6vi4nTHJexJZ8F/vAXW+g73XKUNcKax6+J/AudsqAz85IUFP4FtQvhVME+lAA3bUMMK4WdC53VdexVh4AzNAl7r0pYQ5e3HeRUL9g2Bxvf+pCC8XUvzLL9woERbMBhiIA3C+h2T8/mEvKjFfgx8f5ODTO4L0Ba+5thlPKE7YcPJiiI5KzVJCUcB6Q6uWT2Venwsp/8ajDmYOS5df9VocsQhvxHEe43t6uFcJYlvIGsxTRuVPzMzJGwZWT71vhC1B0rQBiUsUy6c3A11Jdhz+ZDtFJJkCYwlnYwjGvpPjJrMzyMNvm/Z4E2sMk51sOVqwMXoGgMrB/pTwEzPa/4J/Q7J/OnQcvliUCBX5ApbQ0zdydwKkPWLAuYNaf4zA4FDhnmNj6ni2mkNnXu66EyEgvXh30/Td9CEbnIeyDvhfot0NRveepQSeHSM6NQUC/ge/PkEtUxmgKbJ2o9ToH5zx+pnfu6xQs/TUpM52lAoYwT/gFzMTE8rS230FonZ/O8wNUbeHlWP8QM2toif6avgOhP03Fg8SB6BL+UkMs1JG37Td5W0a01mrWz/tNMk+AE5LUv4lNSycCc+wXr0ZvSoAPlLiRlR0wSw06WsYU/g4pYW6WgIHAMx9Rga2zi7FxHSXgxo0bK+niRwDWrIehD5J5ADBr13oWwi+A//uB9zngF+dxw8nM+ZgXsfPIoAfBSashdnusDf7CywAHvM9xfe0EYSB8g094tn3pC5D/Hz/17fTPEsCitv2i6I94mgYL/MRm7xLK8ZTP59LgK57Sj6Yo+IEnJAtqz6koYZeWNNb0bi3EEtDKTyIWspmBCxMra9sLuVcF5eOUgPsdLv8U7hcIf2qvxJX4B89Rrm9G61uCMIOCdXC/zc5ipVtSPq4/XlLU+bqgmBRtFEJYpngcej9F691VogOFr6Tz0M6L90ue+6zteCQKIN7bndz3VvzH2kxASqpdh9B6/OH9Dvga3tbH00YFAMJfPAvx+yHS82piZuEXwO3LSKhfNXuXwbCaFePG8uz5kZh9LgF/AG53xGv+r/n3ee3jx2J1qPNdLAJArqmobb8YpCQKof75c76mZeB73Kx/ZR9Z65/sgNGg6CSBYoP409u3bx+llkP4Ocz5Z5f//DHzu2Z+H8nYj9oIf+01AQnprMJ4Mr/HWbWeUEfAqsD3Cdr9QrlLFfJGiZwMLj+CxFr/1HIgg7IP5fpl7o7yDLVgoHyuyVFQ65MPSYkbhzYxsdUm0FL4Vynj0Z81CZ7EKoyfhzmOeJ4VSF3iPVeB9cafw9R1tBx/XAXeS/KyMQ9AKEkOSbyhJm5SMxPzE+nELAeYjaGgkDiozWqfPYKSUtt2LBmgdv3tLJC3AnkDLhIHhTqhFPi5TwFiNQHgJ9A2McNQYH2LMp39kCNhnVhpUb6yhKZEZuxo2+cOJDg++nPbZDBtrqme8CqGJt6azh1wNeZ2KOTPNQNMCEmqBQuXWmg64B+U8z64iYemLZRzZBhtc025lqJYjhAfywOgO4aPIrlcnUrhu3Xr1kFba5oXhz/X7nOWkfQtwyKHJeL9ttYleVegnKisG/WxJ6oAhJLk1FAlAwkkwFkBaz7cWapZUUTpIFkX2qorCCLsCzo3mfwCwY8fqfhXzTpl9oLzfR4YWKpkKjFhHspqKNf06mw1zXDrwWhI2ghJ/u9JV0pNJMNjFO2Lp+izdfa7KN0s34uXUKVQaZUapQKQohosuypR3XJ55VKCrxSxMSBAJ88vsWR5Cb6O75uuwxQA3TEcLZSwTsfYXAGqUWYzxiFYMHbWHVdz7mF97IkqAJlrikd8As+bZjWpQR8zbfgC/PnnnxSa6Uub5+5FzTGZAJnBOLNf4bYj7S/yRweWH4KZ+lwq39r5lagHsAkpRccSkpHz0L74p5KeufE55/TZs8wUzhoyBJfKCtCBAtBbkapcJc5X8pvQ9s9cy1AKvp5DUlg3Uv3GFADdMbxjqWfK3C8e9DHGriNAQ2gtWF2OQTnX4Cux0SgAnuG+prhHf51dCFCXTSnk7SyhgjCfBQdxzKax5svfO0Oe/EgbvKBQNqA17eDmaTVBaFk4B5j75TxgETiEwsHnvmJ+wjn4AyducCipD5QSKAqbkk88c221F+EP4DCaiBrxmUkRqCiR0M4Y+304dEk56FLTlq9dNeNsCxTqPitUSr9QO/hh+QBm11Q7vof3SMFWpLx4W/heoX8lxxIv/NhYEwkLXyialn2OsTljERR8qQjbhGaZrOxyDMI1IP2+pq2XQyeuACDdL4QlH/RBJEwvhEtH+C6UUhMaId/oxnwBvP87Xg+6G8gwiFk28vivrQXiPHBt/D37IhDr1oZ9v45BJJVvKYrI3tRN/g554Qpl896EvwOdNpYMKsDjpnAcOMWQjrKv60I/gCVI2XzeY3x5yYK097DTFkpA0mIAp0NKc9q1MJB3+Hmq3dk0wkqvBJr+AFK5V7ogRwmQOjhRNH0ExYioY0RmaZTYiwy5yTwAOChm23xz4CgHb96S0vi5td/4CYC8G33UsP+Sf86873rZhwYYeegXgi+VynfTqohlvHCHfQt/h6x/aYRIygqgck7reuZYB31CqTBXXvbUPapMlV0hlr2k4AQud0eizX8ogYRodk4o30iAWI4RIwPtZERyqPTyvOtAHigV+CLRjzWKfS/XhKiIVBt/IqtOBISbwy/7QvL/x/L4B7/szCu2AKuAHAszv/2G/TDYF3QukBd9DWg1JeCiwM8mpvJtImP2j9ljr0KyDrx5SVccKSrklWvv5RBrr/BN0bQ784padQUUnKFD1eCURfrxoFEJ1RQ46otI2vEQpgCsiWYygonI0LkXpA9ohGjw/GUpcjSUSmxx0Z4ykfz/lQkdJnBS3Cz3pbI8UFXcghYNYYslBooPHvtDzESdEoACP5uYyldDxux/cAGiNb8yRci/RLO2DDKWstYCjqmkECT8TH6kDpEwtUMamJylD40VQHGMgnoilFl0yO+/DogFpUi1G3oi4mBZsEy1QT9eJ7MnstVSD3z+/FllWXDnvlYqYGhLmJ1nLg9UmbWw1i9lEWehtReYFYcyQwMoARjIArnjJ53KV4P2haOBZsghlJorHFhWZs2hpE8hNOaxLpBCV5oXsaAOGWvABBlLH42WD8nfkaLoy3+Cv/99qg1fZ3KZwoijCbmEMjvWeCu+ScepdjyZXdS3sQVAZRnuy5lUsvEmQeQb/k+mAs740gV+F1PzY40jhJht53wzcMOPRLPG4FCKWXFwUJyIz+ON/D7pVL4ZLDSN+l4fbwICBOmeU+342cQ+KikBsoXRQGAZIJC5sg7kWNFF/xpzwPTOYV+zFCPRPDF/jt9IQdcZFR0y8KfC3N6SsQ7zVIMxlVmAsHZkjGxqw31lxYIH5Z+Xu6EENCqozhLWhx+Z+OR8p2pLPYGL40FwQQNkDusaxATzAzq5Krm/UdFMoZCdssXlezI6QZvdrKmv5+QB0GYX7BttLoTY+aKSIIoJkYI+cjmsi+UBaD6GMs8DQrbv04hIqvRfU+1CiaEy8oGUfYbqari0BCBlYSvPfaSKRbIPvJAQ5rnrHbXlAWhzpWY/WcccTfgDnPdVEf5S2VBjIrdZTYdwvy817TpyeisnFJGiWmaJLQPw9iNS0lXVQWM4NOG6/FxHH4u0y3hsiSrq27gPa8+/KhDmR8kNzSUFQMKSCtFe8IKiNOMzJPmB8x40P8wmJbTvGZQDzHSwxhxbkxOP/4sEPKm1lbFNP1eNjMQq6oHXSMOzf9VaYBf0EVPcFu5v2n50N7RRu/7qsXQRRmRsApql4WOaABp/EApcT+ZYWjnHh/LmDMElHwDNbMSbTc65PbmSu6gYiLUPaE3iyPMeHrX44bVXONg5B7NDMQMtqbY8gBf/Cqy3Twqtgxz1FJd6XYEzEN6JIZiS8oaZU6h0d50mq5TWl8CjkFDjp1Lw6MjGkclyN9VAE4kxEKWizUo/hgVb8w74SN6chfhBvYQiPUSo+SUFIENYxJh5F70Lhy38iHLgEnjgok7YqnAint93xRxYkD6k0NCTfOGY06lXL+wTaN7wioUTKqJSoAiv6+nNpkEaiiGdG5Vg5jRPtIk6QGI5g8cLKDW7lEcBiyWPN894IMU9OeYx5i2bnU9MIZgGmuXIqYxFUEQanI4dQWc7lqWPYjVtmnCO8SgxL0rEW8hJTbnjNtSjAArqkbr1oH5zUZ+cjE7h+1ykOvFWT5nVpoo4qP4IL32pQeHne6j+V7z4U+F0gkmpVP2J7zvGgzL0GXJyyOcFtUDGmns8EO/BSumskzg3UwpGJSkQO6qCuTaaMYDbBB2nsZTF48yDQJG5nO+f838Yq55iEg2llrdBKan6bxd+P5cUAD7oEX8ZBhPMGmdnw+a9Lu2F7B5N0hJuowq92mSkGiRib/dcEo4NEvJRJqq8qc6packRSg0vo+y0KD0cw1kn504pECsBFILXPPYdT1CRulKMnSWvD7gPR8PtJLT5kaYyoAan1PJ3ovies6pfWAnaKASXFAApJnBpPdE3j4owQaEepxxkmTeamNC6z1Uj+Yz43ifDXTYVzPaRBTFzTXljmKLyBgdIHpCS7VLKKWZRUAJYOL/o4/l5VoKFWAmO4FA51PrrdYPN2Fhio+sE/N5k5o6Q4II6xrcScP+tHGiR8EyrDCQTAcmsvAx9hkU8hEHwy14pCfif2lsPNB6XRg/ws/qFrhjSN5/yi7FHV5gpKm9dOkBKkrEdhCTTudNwQf0Bv6Vd8SE4QkSSWSWNdYFPg1izltQiL04GhWTZXYgysJ/KN7FWJkDRkk8oYvKD2RXWAjgXirkvaj1QpgA1MpBkFnTdQL/j6+5F4zbSSDa0ZLucHAgIJeZB9HCAQRS4aqYYSBHCbKHJxlq4bLk8Nh3w/88GsEheRMY0KQKdpAKO4XlzHrttzmqAut/Ih9z1UoLxD9zpZhpT7FVC1vqxbmx96orhBlFWBJaSUObxWf9+SsgzsBg7Y5txNRCZuOOFwiOdcEH94fIM3OXvXkmd3YsCAL8BzPrF2apaEuAfDMyF87gORQEY3YIBUzMTuyp0JPxhOkMBqOp/WgPMIsmI0tbqJ4rAIUlOEThFyWRiTv3gMrY9uM7hssYqbX1w/Po54qe0y7/+2JdCiwJ33H/nvKy14/u3tFIA3Cyef62EPL98iOWvhDydvyyUy5ZV2BqNq3DvJeXxpRLOGnwv2q5jbTFzpGvIkN7eMpDCrHqAcQnZTGFdRKGWjq2L6F9QAnZMCWiHUuGDA+kD2hC4v5W0JuKwh5/q3UH2VvRhOs+R01kfxrFQ7ZZfkwslIKoAaGbxoKuZ/NmwIYfXCTzoK28O50EDOeELbXvxlt3vK4f+gEKwoImh9fbu2u9HBrVjqi05dqgUwDfgFR/yvkUJ5KOMDplNqK7F4EChFaX2yG2DZRMO9qIUrGUlECXgopLmJQUA+bQRMkUtZ/FrUpDRB0kFYNOVL6/ypIZqhtH3IMNr1LMhlrg0eR6GRuvcN0Tob0gp8PpLm/XXggdQVCt8RBvG2HH42ugQKG2mYP2DWJzwUykFYoHflbwmu5QJlgP4HXiNMfCr2gdzGk8Qz/BiktE1GnNlQRsMD+aPlU1Pb926dX+IGYaExA5BESvENRbalOJ8j0YZ5F2lUhQoQ1liykxBDt+OMQq3rAuUUhoREerJZx6qsGf8A+4jvPq5/z5AOWIU2SNltV2HTPSprgD0tbZVpeFEqV/+eS5VAfFzSN6Ji4nD6BC+x5oY/9kmDmhAZjUqLZjvxZOhPLk7qKuhRqp4TgaY2jXtplDDwCkDuYMoQgRpwxhQKY2itPrYcrASTxn4gf9Uh6tiso8J9yUFYE2NvOQfZNI65IM/EQF/HxoKn9z3fJL3+eeRVC6Dc8Mz8ZIuvGNoZ3KGHtUgy1r3nDYQTX1xoUwlxegSrRDsgqkpzsolpZMpmXnRN/g+whpQKnf5KbI9eU1jLdsMqZQ28FbRxhSAFiBXBmUoAegPdSfAJmFxKtWRSplVIof2qbaohkvJmhisZvBDGHKgjsHn8fDmzZuvN30tih/ysTIXAATWIW0eqsECDn80EJKAaU4DMaSykULW15Om5inWMJACLo+UBVzuRdaqkz43Y0XdiBMkjUzyubuaHWRkAyWAZRf8j5KTaRRDu6QAsMAreSZ4zL9C0P8i5poTbG8jCGUgxInsaQYFACWBdzsaU/CKM+QLPvdqQNhkr1TJBaBxBNzl+/5kAxUeTbnjQStNwkGHBgTmvKk4TvF7rs3Sp5kJDo4UcDnW5BSQtepsRSZWQa5vpuDsq5yQFLFS0UYaHuuWIndT3L2kAMgAskNrIrP9n2SdLNfxBBEI0P6WNBLOQQLngtnApqcDRXEIhUY4+/Tp04LOY6pHgQfeZNUsfh7vP378eHGOSnPq6cCDSd+palcY+50B4o+x0LStK2QaB+Dt7e1BKoZyH3uN2VGqnfS9ugKAv4vEroNbbL799ttdFr65Y3HnyISkpMQ9EtmxpJFQ+kRdlOJ24aapHbrONRI7KSlAlDqfWaeZANHJ4JHdYk2ypHNFwXXQpyjGMUbCDf7eZwGhstHpQOF3oTEJIZsajaQASCKfhaLpE8pnsJmxXMechucxj0EHY1oBJBdDEuRgqL9HGrM7z7gPaYDwOygaqA6YIhLuqMkMNxt6hsvX8xNNB0RdpPrKaP0Z7zArID+n2sHHjUQBlLC85ASGj4skR0fUM3wuKK6XVADWThSPnoyCA/zzK3eyVzmDHwaCGzduPBDHwEsvkyTcKGhA7ty5g9zisbWnqlPgWmnDkCUMjXPSfKxQTKRz1bRDxj6aMFoh2AMzsQKMQs7sn8JhdyUlkHSpvbNOgiJtJBVb2wZbJsp8Nr2jfIdH68/Kd7j0J6hY2lDsQxrL0pC0VgAgKFgYvuKHhHKkS9Kb+vFy7fNs+ge+aXC4eRoRulX+7aGUADj98cPRzH5hDfh5A8Pmnmsa8fN4MUZcOd97zZpV2dIqNEis/AQGWljORlnn5UHzmbJpLBpD4xMwqVwhoZA2OEWTArG2DcKISmkQTEgw+VM0fTz0OKt9h+vnL9n7NJOshxPK23GapQDgxHmWjKICb8Rkp9ZiJef6Ewh+eCryegmqIb1LrFMMogTIzP8wY5fKGoB7QRsC33coN5qZTSGpIgdDrCqFounKzFGbTW6IWHnuzxrv8V4Ry9mgA4w8P20uhqPI9mNS4Pnn9IY2XC5kKdDmNhjK2gaHZprQ7N+hjMpBxrukWb1LtMrSzZs3V85fGdkyiGVDGWlSqhQAZ+aH0OMDP8s18yPbFmv9O3DeklrhT0WB0AxUrhLXgjoG14U1f+XMfwXcCyhDm2ANkLU0lRVAKkcN4sgmGrfqhWAl5rC+DdEqpKDvWPkMJaZv8L4MNmjC74f0zlolD5zBPsjbVeuiGHv6Vry1YZWIjqpvw3s2FWVG/FEmuWQpy5Jlqh2e91DLrlplKeTDAuA8Sjp6tWxk+CH90qgAQEOFgFvDzI8EQDsujE4UiReUHjDqg4GrafyiqxuHa+Pretew5q+aleBG96WgdE2GFQDXddC3OVlqYqsUQSSYCr102sGWzl+6XmbGMkAtaTrsaiIq1gXvEM+Wc77nZczxLUdwcrunfQ2gGZklo97cWkHQpzKDvs7LEaiOWdBE4Xdf69C57FsJyFGWYtaL27dvH5JufO3VssH3VTV54+s9jioAENSYpefO9pEB0Jn5/RdEPCvfUbOGhTrs8PK+FznhBawQ6ygCTqkRC0SRaD6T8ykT7TpXUPpABlmtFz2u/Y3M8DoH/SFjgDoNmdyAduZI5y+ddp1azQSFfwXeFe6P7/rqj1g2y7DigVIylUXJSNY062tpkPukamDmc436LIggUCFWxE6tbVIs5s0U4v6byPAFAL0pAd5EpEi1xfnG8sLI+KqqKwG52oeSnmNRhTNmkwVAZVqlc43nyJn54eBT14whRLDeT803uEShFr6BdxPtfEXgHWL0IdRjszsMEpidw9SPSIUcpQYvEJ/3XaQIVVoDFlO3BogDllpoIrKj6xdPyluqByhut9/FzBHPp6trcctH1Cz8SxoR3N+u+6NY8V7lLptpZnuZAqFz/yD0De3YwIpn9Ppz+iSA/1FXlgC8W2LZjL1bJU0IOIKTPkx32fUkK0f4A37ujf2Yr0f9Xsh41Fm0W45FlTmBQ3VUAVCYiy+8+VGVKKYV4aWCEEmc1BGE/6dPn+AZuyAl0skrfwIsU/B3ncFD3/s5g6KA2bmY+rNNwHhIMKlAuVHOnn1rQC8m53Xhe51bPaqKfFjXackJTb4/KWXwAgykfuKfSJucJE3LdV86zfIRnStZWVXm2iAFtZqo+iOueZ3n5/sBUX4J0n1tNs3MZ9lJaK5TakhpyYktR9XaZCUOE0tAa+Hmnk/TuyV9ZVIZGOE9z1YXdW6HriZZ7n4pJqY++6nnLtEAOc9+t4vrqQr7ZCgyKMpX/d/UiG/QIdWymomZP/lCixlKkxdgH6ZB0V7wMEJCs6omeNZfghVX5yA6I8VSAARRpsZYYuYzxVTCifsdRWY2L5HJTZPIxGXIQmZISfST832lNvkSrEG5Jk+pTvlS83xwHciUiPAtTT+EYizZzBqFEyxnDcrzGSXAkltmXXD08+cw/6VCKl3dcf71R4nBb6PQHmGCkLMDP8sDTeKqGiX/4Hm+1oaKQtjyM8L4ljU5wLNV9sk216Hul7nvFs6bn+de6pzQp5rqsWj7ZU5NF1hyKZ0cqE4p49Fz7TOXWhVw8sydEJZScS+JpMDPUSwqcsdWINeDPrwgPRfXsqU4OIRdtbaBEB7NYAkzFMKRqPkGnPIgdGE5wAwz1l6qC6Jz9DajhkYkA2nR0Oa+62iZHXaSqYTlOeWs415ClLKSf30vf5cui6KEodyTv9sc/xRWocwXoW0Y3qmE8OB6fnPhXcj05l1HjnKxL0U5FqnsYF0oAPCDaDPgyP64blxvib/5fHHNsBrM2hyvfmw+t5022dzgp7OGwr/yPFG4DH2Rt39H5/4tc2p3ffspXwZHW0Hg4a6jpHP/qN/c+VPmu+UmMJpxawwFQI6L9m39IS49c4xFqD/jvcOFvMNtxiL1RMTRdoLlqI+ttTHpO3n28zbH9xXYrVRjrN+zieZY+xLDOYhPcNl0YjIwPHAnIWbhvUjbQ/7vbWQgLelyCmENJYVfSHSgnYRAvCSUcq0BU0wlrFTWhqZ6FrlJf9rOuLoEiiSf956czyAKAAbadQecrllH+IMpOrJhhoalwJx91lRMO8Hvk/A1wHJDov0oCgCYwjtco/W4ve4Eqw+cIuj+TuYB+P3334+0L7EXU990wS9lYChln0XDWirihrHuHtQKxWQS+66yYZ8QM8SKQ/BQHOd9XH0n1nvElKKZ3U8ylTCEbGYd9L6pnEHbZPyTQa73dfcYEHpuoAWYddJAoC9K3y1pfF6uI/wB9sUxtiZSNthNWigTcWxsU7+iK16O1SfbIOc6FWvpWpM2jGETeifBft2fau1aAACzDzHZ7TW1g/bBAnPhBoZU7CVuPg9ss5gpkLfH4m1LipTpRDU5iisHj+WhNb2wyJT3yt8AkyBmcqR70JNLJQzhAaFLIwpPAOUsx+wfAv3LObgMCc4dAsvfdrZGTvk2TECZO62/42sdjOFruj/G8/Rxz7btNfE1HIyhBOC+4VnQhoHxFBYEGldwHq07FoEJTbCCS1drKwBeSNe8oRmc4XZWtI9m83nlcdmQmvEkps1i/Yd/gmGMCOujuKArWDjv4oWlBi1UYjgvmdGg6WcI0cmlEsbgJsJzjBevEhwwr3YhOIaeRYiJdeXch1YAwFjKnFPeUhEbbcDzHEsgxJ5tLhhTMiYJ6+Lep5XxZUuZOntssHwggnPoSYlTYh90MRaBTEtx11SyN+a3spYCIDn0G51cYDrDTL6+ztmUOhXr/t4JzyNtnm+Fy3Fi4EVJzpPIZ/eaQhy3pCiNfH+088HaURfguUIUa3FTCxXEi4fOOtCAexFK2rXgwPPjAQQvXUk9sfVPmuugIvfly5dRzK2uH6LSJvX/DEtZ7+3Vv8X1SzofREvqmdSzbQPGwL6FWkoRG0MpbYsIzsWmj0UOb0waRKmBjERfaHLcb6UAaHPoi/a8YkZJ5A8vXdY3aVeEGiFUAgWFIt9bUkQBwPGa8uKfeUU6+ObtNa1BQoCHMuVlaK/7XWmZXeMrAlsZSU2U+Dkkln3dA6d5d30NnnDYmWKIpwP+O309Q3cPcPw2zl5tkUF0R66pc/+Avp+tE2pdCwL/vJsUsbGU0nVwY5FYUI6oWwYZixyB519St1xcD5TX1PVsUSYuhWvCOxdmlP2QJpXynK+F2sGDehFoc8htHjWEtOAGHEgNgxVwc3COktRkFjj+hbevwtO/MVxNnBxD1g51XOkUkOc+l1BJPPsiY3eXx+Et4s/HEpq4Bj6PXYnlzwoJ2jqvZvkWBYlyZroKX4/T2Evatbd17RnOKTN6BvcAPjRIdTsVxdU9063zAj65/RK4WPK3CKcc+rpcrgVZQsU1FMpdq3cKdQdyn8c6fVK5f/IY6+D14znfg7uZkSIuXPC9Nqy9bzDhlDwbd9uEKsr1vG1zPdkKgCKMBC/Ug5gXdyK+98JRQQTvz6FGLnQqFjfqBsWG3AIP+HuOmmJi/fAsRThHo7eodNgX/nVrk4lMFZeEBMswiLd18f/AxV3DErO9vV1O9ToxkMGKhHN3McPuM2+tFN7f5RgCr89wK+Alkpnk9bdB0y/xw5+VU7wu//zRN+vPBOfOY8nJJo8dXaN95pty39y4NMT1ZCsATfG54i37oGFGEy2cslWLsW2Iob6YOceUCU9BgLf+ionexUJKoo5f1zwf1z4Z98zHQBYuKE/qZCLG9aVvBcAwjOtNtg8ABByvI604F6W8ZWVdfRk5bFkvstAQHuivm8WcAF3WpF9Cn0skAMm5vowcY+6bumSQbYoMuJeqNgdPYJRINuFvGIZhjE0rJ0A4MnjVvU5lFrIXaw8TOJsyorNnNmU88U0ZoiwUobZYg3W/+6YRH5j25NdoJID7na/jkCIgb7b/t8SnRmOSzxTV5jbFlGoYhmFcbVqHAcLEjjAjydp22NSWhSxmxkXk4314K/sbpLjBCjDL19Y8ghYAT8gGFQD/XJpKkLJAf1gP05OY5GOKs+y6vrdhGIZhdM1aeQAkTXDZ1EZmxLuRj8u6OVwEbqz9hbkeVoXYMd0vniWgzsw372/FS3fCR2DFsiEpQcvIPlAcDuA4SIZhGIYxUTpJBRxDhPQy8nHlOV/fKOVHQzP70rc0bG9vF4E2lzJdiSWgDLVjwX4hoJusAMzjuhUAx5U4/5g5H56ba9WcNwzDMIw+6U0BgNCU+PkgmHVHrAdNhX/8v5uyAPq8jbQrasfLsgKIH0RTcRCk+z0gwzAMw5ggvSkALPyi6/4SMXBY3y7FgeahfVx2QEciC6BPGWrnIgEcEvMfbMsEy1MmKn0hH8KSDMMwDGOC9KIAIGaeAhn8hDIWMdBU+KduLWiwAJzW2pWRdvcC22Ie/jO5phUihYOq5Y02JW0NwzAMYwj6sgBA8JWB7aehdX+PeWhjJPSuiLQt/b+/fPlyTGGK+gak1KT4un7Us18cGV0kQydlJA3DMAyjT3pRALwayJfC+1AfICYYU4V/6ttY0P8n1LauAGCtnsLM6k562iJBIVjoP0I+hC7LSBqGYRhGX/TmAyBVj+AkV5nHMYtvKrPIM/WY81+s+IpqCUAoQ239SABHU6nghuyElfJgKVkNwzCMTaHXMEDgaiDzLH4ZayPhgsHYf1YAYql6i9D2SOy/KhIArGMFMAzDMIxNoXcFAMAa0GQWR2nHyEdlQ3nDVBbAS8cJta1HAjjaWgEMwzAMY1MYRAFIEROqMa98TRZAn5xIACBKxOvIPgUZhmEYxoYzugLQVPjn9u3bR6HtmiyAPjmRAA5etljWNpUoIwwPfzIMwzCMDWd0BYCFOUIG4ShY+tsDhX/8z7RZACtyIgFq+7zEefBSwc6HDx9+gBOjefgbhmEYV4HRFQAIVDgKQsBC0NI/BX9exvbJyALoE/wsFAng4HNa/PHHHzsNfgiGYRiGsZFs04QQQYufRVM7VhSQMnhleyQE0IFIgCKwHQrAERmGYRjGNWISToBd0WQBYOXAT8uLdkfITcBr+odkGIZhGNeMLdpQsHaPpQD4A7j/IcybUvB+880395AnwNbxjU3g66+/Pku1QfZJS0BlGEYbJrUEkIMI+tLfxmv2jftYcR7DMAzDOGdjFQDDuOogDbaiTUmGYRiGYRiGYRga/g/WyTwKgeZAQQAAAABJRU5ErkJggg==" alt="Capsules" class="deck-logo-img"></div>
-
-    <!-- Slide counter -->
-    <div class="slide-counter" id="slideCounter">1 / 20</div>
-
-    <!-- Progress bar -->
+    <div class="slide-counter" id="slideCounter">1 / 14</div>
     <div class="progress-bar" id="progressBar"></div>
 
-    <!-- =========================================
-         SLIDE 1 — TITLE (CAPSULE ARCH)
-         ========================================= -->
+    <!-- 1 — TITLE HERO -->
     <section class="slide slide-dark" data-slide="1" style="overflow: hidden;">
         <div class="slide-inner" style="align-items: center; justify-content: center; text-align: center; gap: 2.2rem;">
             <div class="reveal capsule-brand-pill">
@@ -1430,341 +1197,148 @@
         </div>
     </section>
 
-    <!-- =========================================
-         SLIDE 2 — THE INVITATION
-         ========================================= -->
+    <!-- 2 — THE INVITATION -->
     <section class="slide" data-slide="2">
         <div class="slide-inner" style="align-items: center; text-align: center;">
             <div class="reveal">
-                <p class="label" style="margin-bottom: 2rem;">A campaign for storytellers</p>
+                <p class="label" style="margin-bottom: 2rem;">An invitation</p>
             </div>
             <div class="reveal">
-                <h1 class="hero" style="font-size: clamp(3rem, 7vw, 5.5rem);">One hundred stories that deserve to be <em>told</em><span class="accent-period">.</span></h1>
-            </div>
-            <div class="reveal">
-                <p style="max-width: 580px; margin-top: 1.5rem; font-size: clamp(1rem, 1.4vw, 1.2rem);">
-                    A curated collection of visionaries — the pioneers of a new storytelling medium.
-                </p>
-            </div>
-            <div class="reveal">
-                <p style="margin-top: 2rem; font-size: var(--label-size); letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-55);">
-                    Capsules · Campaign Direction
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- =========================================
-         SLIDE 3 — THE BRIEF
-         ========================================= -->
-    <section class="slide" data-slide="3">
-        <span class="section-num">01</span>
-        <div class="slide-inner">
-            <div class="reveal">
-                <p class="label">The Brief</p>
-            </div>
-            <div class="reveal">
-                <h2 style="max-width: 800px; margin-top: 1rem;">
-                    More sign-ups. More paying creators. More <em>wonder</em><span class="accent-period">.</span>
-                </h2>
-            </div>
-            <div class="reveal">
-                <p style="max-width: 650px; margin-top: 1.5rem;">
-                    The priority is simple: founding creators. This campaign defines how we get them — not by selling, but by inviting.
-                </p>
-            </div>
-            <div class="reveal">
-                <p style="max-width: 650px; margin-top: 1rem; font-weight: 500; color: var(--text-primary);">
-                    100 storytellers. A living gallery. A campaign that builds itself.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- =========================================
-         SLIDE 4 — BRAND FILTER
-         ========================================= -->
-    <section class="slide slide-dark" data-slide="4">
-        <span class="section-num">02</span>
-        <div class="slide-inner">
-            <div class="reveal">
-                <p class="label">Brand Strategy</p>
-            </div>
-            <div class="reveal">
-                <h1 style="margin-top: 1rem;">Everything gives a sense of <em>wonder</em><span class="accent-period">.</span></h1>
-            </div>
-            <div class="reveal">
-                <ul class="vision-list" style="margin-top: 2rem;">
-                    <li>
-                        <span class="v-label">Mission</span>
-                        <span class="v-text">Building wonder-full containers for stories that deserve to be told.</span>
-                    </li>
-                    <li>
-                        <span class="v-label">Position</span>
-                        <span class="v-text">Where stories live.</span>
-                    </li>
-                    <li>
-                        <span class="v-label">Category</span>
-                        <span class="v-text">Storytelling Tech.</span>
-                    </li>
-                    <li>
-                        <span class="v-label">Feeling</span>
-                        <span class="v-text">Wowed. Moved. Inspired.</span>
-                    </li>
-                    <li>
-                        <span class="v-label">Filter</span>
-                        <span class="v-text">Should give a sense of wonder. Everything. Every post, every capsule, every word.</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- =========================================
-         SLIDE 5 — WHO IS THIS FOR
-         ========================================= -->
-    <section class="slide" data-slide="5">
-        <span class="section-num">03</span>
-        <div class="slide-inner">
-            <div class="reveal">
-                <p class="label">Who is this for?</p>
-            </div>
-            <div class="reveal">
-                <h2 style="max-width: 750px; margin-top: 1rem;">
-                    An active, influential storyteller with an interesting story to <em>tell</em><span class="accent-period">.</span>
-                </h2>
-            </div>
-            <div class="reveal">
-                <p style="max-width: 650px; margin-top: 1.5rem;">
-                    Someone who's interested in using new technology to bring their story to life. They want to tell it beautifully. They want to share it with the world.
-                </p>
-            </div>
-            <div class="reveal">
-                <div class="tag-row" style="margin-top: 1.5rem;">
-                    <span class="tag">Writers</span>
-                    <span class="tag">Filmmakers</span>
-                    <span class="tag">Journalists</span>
-                    <span class="tag">Founders</span>
-                    <span class="tag">Educators</span>
-                    <span class="tag">Artists</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- =========================================
-         SLIDE 6 — THE INSIGHT
-         ========================================= -->
-    <section class="slide slide-dark" data-slide="6">
-        <div class="slide-inner" style="align-items: center; text-align: center;">
-            <div class="reveal">
-                <h1 style="max-width: 900px; font-size: clamp(2.2rem, 5vw, 4rem); color: var(--text-on-dark);">
-                    We invite them to be one of the special <em>100</em> — and give them not just the tool, but the <em>platform</em><span class="accent-period">.</span>
+                <h1 class="hero" style="font-size: clamp(2.8rem, 6.5vw, 5rem); max-width: 900px;">
+                    We're looking for <em>one hundred</em> storytellers<span class="accent-period">.</span>
                 </h1>
             </div>
             <div class="reveal">
-                <p style="max-width: 600px; margin-top: 2rem; color: var(--text-on-dark-55); font-size: clamp(0.95rem, 1.3vw, 1.1rem);">
-                    A chance to be immortalised in the history of novel storytelling.
+                <p style="max-width: 560px; margin-top: 1.5rem; font-size: clamp(1rem, 1.4vw, 1.2rem);">
+                    People with a story that moves. A story that deserves more than a blog post, a PDF, a scroll of text.
+                </p>
+            </div>
+            <div class="reveal">
+                <p style="max-width: 560px; margin-top: 0.8rem; font-weight: 500; color: var(--text-primary);">
+                    We give them the tool, the platform, and a place in something permanent.
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- =========================================
-         SLIDE 7 — CURATION
-         ========================================= -->
-    <section class="slide" data-slide="7">
-        <span class="section-num">04</span>
+    <!-- 3 — WHAT IS A CAPSULE -->
+    <section class="slide slide-dark" data-slide="3">
+        <span class="section-num">01</span>
         <div class="slide-inner">
             <div class="reveal">
-                <p class="label">Should we curate the first 100?</p>
+                <p class="label">What's a capsule?</p>
             </div>
             <div class="reveal">
-                <h2 style="max-width: 750px; margin-top: 1rem;">
-                    Inspire, don't <em>gatekeep</em><span class="accent-period">.</span>
+                <h2 style="max-width: 750px; margin-top: 1rem; color: var(--text-on-dark);">
+                    A wonder-full container for a story that deserves to be <em>seen</em><span class="accent-period">.</span>
                 </h2>
             </div>
-            <div class="reveal" style="margin-top: 2rem;">
-                <div class="card-grid card-grid-2">
-                    <div class="card">
-                        <div class="card-icon">◎</div>
-                        <h3>Inclusive by default</h3>
-                        <p>More inclusive, not less. The story must move you, emotionally, or have impact. They should be wonder-full.</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon">✦</div>
-                        <h3>We help them finesse</h3>
-                        <p>Not a gate — a curatorial hand. We guide, support, and craft each capsule alongside the creator.</p>
-                    </div>
+            <div class="reveal">
+                <p style="max-width: 650px; margin-top: 1.5rem;">
+                    You write scenes. AI brings them to life with visuals, motion, and sound. One click publishes an immersive, scroll-driven experience — a single link that embeds anywhere.
+                </p>
+            </div>
+            <div class="reveal">
+                <div class="tag-row">
+                    <span class="tag">Scroll-Driven</span>
+                    <span class="tag">AI-Native</span>
+                    <span class="tag">Zero Code</span>
+                    <span class="tag">Embeddable</span>
+                    <span class="tag">Cinematic</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- =========================================
-         SLIDE 8 — THE FIRST ONE HUNDRED
-         ========================================= -->
-    <section class="slide slide-dark" data-slide="8">
+    <!-- 4 — THE FIRST 100 -->
+    <section class="slide" data-slide="4">
         <div class="slide-inner" style="align-items: center; text-align: center;">
             <div class="reveal">
                 <p class="label" style="margin-bottom: 1rem;">The campaign</p>
             </div>
             <div class="reveal">
-                <h1 class="hero" style="font-size: clamp(4rem, 10vw, 8rem);">The First <em>One Hundred</em><span class="accent-period">.</span></h1>
+                <h1 class="hero" style="font-size: clamp(3.5rem, 9vw, 7rem);">The First <em>One Hundred</em><span class="accent-period">.</span></h1>
             </div>
             <div class="reveal">
-                <p style="max-width: 600px; margin-top: 1.5rem; color: var(--text-on-dark-80); font-size: clamp(1rem, 1.4vw, 1.2rem);">
-                    100 stories that deserve to be told, immortalised, cherished, encapsulated in a living container — a capsule.
+                <p style="max-width: 600px; margin-top: 1.5rem; font-size: clamp(1rem, 1.4vw, 1.2rem);">
+                    A curated collection of visionaries — the pioneers of a new storytelling medium.
                 </p>
             </div>
             <div class="reveal">
-                <p style="margin-top: 1rem; color: var(--text-on-dark-55); font-size: clamp(0.85rem, 1vw, 0.95rem); font-style: italic; font-family: var(--font-serif);">
-                    Spell it out where it's story; numeral where it's punchy and casual.
+                <p style="max-width: 600px; margin-top: 0.8rem; color: var(--text-55); font-size: clamp(0.9rem, 1.2vw, 1.05rem);">
+                    100 stories that deserve to be told, immortalised, cherished — encapsulated in a living container.
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- =========================================
-         SLIDE 9 — THE GALLERY (100 SLOTS)
-         ========================================= -->
-    <section class="slide slide-dark" data-slide="9">
-        <span class="section-num">05</span>
+    <!-- 5 — ONE HUNDRED WONDERS (GALLERY) -->
+    <section class="slide slide-dark" data-slide="5">
+        <span class="section-num">02</span>
         <div class="slide-inner" style="align-items: center; text-align: center;">
             <div class="reveal">
                 <p class="label">One Hundred Wonders</p>
             </div>
             <div class="reveal">
-                <h2 style="margin-top: 0.8rem; color: var(--text-on-dark);">The gallery where capsules come <em>alive</em><span class="accent-period">.</span></h2>
+                <h2 style="margin-top: 0.8rem; color: var(--text-on-dark); max-width: 700px;">
+                    A living gallery of <em>100 stories</em><span class="accent-period">.</span>
+                </h2>
+            </div>
+            <div class="reveal">
+                <p style="max-width: 580px; margin-top: 1rem; color: var(--text-on-dark-55); font-size: clamp(0.9rem, 1.2vw, 1.05rem);">
+                    100 capsules on display — living stories you can dive into, walk through, listen to, step into. It grows as each creator joins.
+                </p>
             </div>
             <div class="reveal" style="width: 100%; margin-top: 1.5rem;">
                 <div class="gallery-grid" id="galleryGrid"></div>
             </div>
+        </div>
+    </section>
+
+    <!-- 6 — WHAT YOU GET -->
+    <section class="slide slide-dark" data-slide="6">
+        <span class="section-num">03</span>
+        <div class="slide-inner">
             <div class="reveal">
-                <p style="margin-top: 1.5rem; color: var(--text-on-dark-55); font-size: clamp(0.85rem, 1vw, 0.95rem);">
-                    A wonder-filled page with 100 capsules on display. Zoom out, dive in, move around to explore.
-                </p>
+                <p class="label">What it means to be one of The First 100</p>
+            </div>
+            <div class="reveal">
+                <h2 style="margin-top: 1rem; color: var(--text-on-dark); max-width: 650px;">
+                    Not just a tool. A <em>place</em> in something permanent<span class="accent-period">.</span>
+                </h2>
+            </div>
+            <div class="reveal" style="margin-top: 1.5rem;">
+                <ul class="perk-list">
+                    <li>Pioneer a <em>new storytelling medium</em></li>
+                    <li>Support from founding creators to craft your capsule</li>
+                    <li>Your first capsule, <em>free</em></li>
+                    <li>A special founding-creator discount</li>
+                    <li>Promoted across all our channels</li>
+                    <li>Guest on our <em>podcast</em></li>
+                    <li>The First 100 badge</li>
+                    <li>Early access to everything we build</li>
+                    <li>A say in where the product goes</li>
+                    <li>Your story in the <em>One Hundred Wonders</em> gallery — on the page, on the wall, and in a physical book</li>
+                </ul>
             </div>
         </div>
     </section>
 
-    <!-- =========================================
-         SLIDE 10 — THE VEHICLE
-         ========================================= -->
-    <section class="slide" data-slide="10">
-        <span class="section-num">06</span>
+    <!-- 7 — YOUR PERSONAL CODE -->
+    <section class="slide" data-slide="7">
+        <span class="section-num">04</span>
         <div class="slide-inner">
             <div class="reveal">
-                <p class="label">The Vehicle</p>
+                <p class="label">Your personal code</p>
             </div>
             <div class="reveal">
-                <h2 style="max-width: 750px; margin-top: 1rem;">
-                    The capsule itself is the <em>campaign</em><span class="accent-period">.</span>
+                <h2 style="max-width: 700px; margin-top: 1rem;">
+                    A key that's <em>yours alone</em><span class="accent-period">.</span>
                 </h2>
             </div>
             <div class="reveal">
-                <p style="max-width: 650px; margin-top: 1.5rem;">
-                    Using the product is always the way to approach marketing. It's the marketing channel — and also a wonder-full demo. The most inspiring way to show them the magic of Capsules.
-                </p>
-            </div>
-            <div class="reveal">
-                <p style="max-width: 650px; margin-top: 1rem; font-weight: 500; color: var(--text-primary);">
-                    Promo for Capsules, and promo for their capsule.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- =========================================
-         SLIDE 11 — CHANNELS
-         ========================================= -->
-    <section class="slide slide-dark" data-slide="11">
-        <span class="section-num">07</span>
-        <div class="slide-inner">
-            <div class="reveal">
-                <p class="label">Where do we reach them?</p>
-            </div>
-            <div class="reveal">
-                <h2 style="margin-top: 1rem; color: var(--text-on-dark);">Own channels and <em>borrowed</em> audiences<span class="accent-period">.</span></h2>
-            </div>
-            <div class="reveal">
-                <div class="channels-split">
-                    <div class="channels-col">
-                        <h3>Own Channels</h3>
-                        <ul>
-                            <li>Instagram</li>
-                            <li>Discord</li>
-                            <li>LinkedIn</li>
-                            <li>Community Calls</li>
-                            <li>Podcasts</li>
-                            <li>Emails — CTA / Signature</li>
-                        </ul>
-                    </div>
-                    <div class="channels-col">
-                        <h3>Borrowed Audiences</h3>
-                        <ul>
-                            <li>Founders' own reach</li>
-                            <li>Earned press &amp; podcasters</li>
-                            <li>Barter partners</li>
-                            <li>New partners</li>
-                            <li>Founding creator communities</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- =========================================
-         SLIDE 12 — THE FLYWHEEL
-         ========================================= -->
-    <section class="slide slide-dark" data-slide="12">
-        <span class="section-num">08</span>
-        <div class="slide-inner" style="align-items: center; text-align: center;">
-            <div class="reveal">
-                <p class="label">The Flywheel</p>
-            </div>
-            <div class="reveal">
-                <h2 style="margin-top: 0.8rem; color: var(--text-on-dark); max-width: 700px;">Acquisition gets cheaper as the gallery <em>fills</em><span class="accent-period">.</span></h2>
-            </div>
-            <div class="reveal" style="width: 100%; margin-top: 2rem;">
-                <div class="flywheel">
-                    <div class="flywheel-step">
-                        <span class="fw-num">01</span>
-                        <span class="fw-text">Every founding creator brings their <em>audience</em>.</span>
-                    </div>
-                    <div class="flywheel-arrow">↓</div>
-                    <div class="flywheel-step">
-                        <span class="fw-num">02</span>
-                        <span class="fw-text">Every audience holds the next <em>founding creator</em>.</span>
-                    </div>
-                    <div class="flywheel-arrow">↓</div>
-                    <div class="flywheel-step">
-                        <span class="fw-num">03</span>
-                        <span class="fw-text">Every new capsule makes the gallery more <em>wonder-full</em> — and the next invitation easier.</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- =========================================
-         SLIDE 13 — THE CODES
-         ========================================= -->
-    <section class="slide" data-slide="13">
-        <span class="section-num">09</span>
-        <div class="slide-inner">
-            <div class="reveal">
-                <p class="label">The Mechanic</p>
-            </div>
-            <div class="reveal">
-                <h2 style="max-width: 750px; margin-top: 1rem;">
-                    A personal code. The paywall wearing a <em>perk</em><span class="accent-period">.</span>
-                </h2>
-            </div>
-            <div class="reveal">
-                <p style="max-width: 650px; margin-top: 1.5rem;">
-                    Every founding creator gets a unique code generated and sent to them — to enter The First 100, and use as a discount for the subscription. It's our conversion metric.
+                <p style="max-width: 620px; margin-top: 1.5rem;">
+                    Every founding creator gets a unique code — generated just for them. It unlocks your spot in The First 100, your first capsule, and your founding discount.
                 </p>
             </div>
             <div class="reveal">
@@ -1774,70 +1348,42 @@
                     <span class="code-chip">First30bluehousemonkey</span>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- =========================================
-         SLIDE 14 — THE PERKS
-         ========================================= -->
-    <section class="slide slide-dark" data-slide="14">
-        <span class="section-num">10</span>
-        <div class="slide-inner">
             <div class="reveal">
-                <p class="label">The First 100 Perks</p>
-            </div>
-            <div class="reveal">
-                <h2 style="margin-top: 1rem; color: var(--text-on-dark); max-width: 700px;">
-                    What it means to be a <em>pioneer</em><span class="accent-period">.</span>
-                </h2>
-            </div>
-            <div class="reveal" style="margin-top: 1.5rem;">
-                <ul class="perk-list">
-                    <li>Be one of the first 100 to pioneer this new <em>storytelling medium</em></li>
-                    <li>Support from the OG Founding Creators to craft your capsule</li>
-                    <li>A very nice discount + <em>first capsule free</em></li>
-                    <li>Promoted on all our channels</li>
-                    <li>Guest on our <em>podcast</em></li>
-                    <li>Special badge for The First 100</li>
-                    <li>Input on the <em>product</em></li>
-                    <li>Early access to beta features</li>
-                    <li>Secret Discord channel</li>
-                    <li>A spot in the <em>One Hundred Wonders</em> gallery — on the page, on the wall, and in a physical book</li>
-                </ul>
+                <p style="margin-top: 1.2rem; font-size: clamp(0.85rem, 1vw, 0.95rem); color: var(--text-55); font-style: italic; font-family: var(--font-serif);">
+                    No two are alike. Yours is waiting.
+                </p>
             </div>
         </div>
     </section>
 
-    <!-- =========================================
-         SLIDE 15 — BUILD IN PUBLIC (MILESTONES)
-         ========================================= -->
-    <section class="slide slide-dark" data-slide="15">
-        <span class="section-num">11</span>
+    <!-- 8 — BUILD IN PUBLIC (MILESTONES) -->
+    <section class="slide slide-dark" data-slide="8">
+        <span class="section-num">05</span>
         <div class="slide-inner" style="align-items: center; text-align: center;">
             <div class="reveal">
-                <p class="label">Build in public</p>
+                <p class="label">The gallery fills</p>
             </div>
             <div class="reveal">
-                <h2 style="margin-top: 0.8rem; color: var(--text-on-dark); max-width: 700px;">
-                    The gallery filling up is the <em>launch</em><span class="accent-period">.</span>
+                <h2 style="margin-top: 0.8rem; color: var(--text-on-dark); max-width: 650px;">
+                    Every spot claimed is a <em>story told</em><span class="accent-period">.</span>
                 </h2>
             </div>
             <div class="reveal">
-                <p style="max-width: 600px; margin-top: 1rem; color: var(--text-on-dark-55);">
-                    Every new capsule a post, every milestone a chapter. "10 spots left" gets more exciting the closer we are to the finish line.
+                <p style="max-width: 560px; margin-top: 1rem; color: var(--text-on-dark-55); font-size: clamp(0.9rem, 1.2vw, 1.05rem);">
+                    We build this in public. Each new capsule is a moment. The closer we get to 100, the more exciting it becomes.
                 </p>
             </div>
             <div class="reveal" style="width: 100%;">
                 <div class="milestone-row">
-                    <div class="milestone">
+                    <div class="milestone passed">
                         <div class="milestone-dot"></div>
                         <div class="milestone-num">17</div>
-                        <div class="milestone-label">Now</div>
+                        <div class="milestone-label">So far</div>
                     </div>
                     <div class="milestone">
                         <div class="milestone-dot"></div>
                         <div class="milestone-num">25</div>
-                        <div class="milestone-label">First quarter</div>
+                        <div class="milestone-label"></div>
                     </div>
                     <div class="milestone">
                         <div class="milestone-dot"></div>
@@ -1847,142 +1393,136 @@
                     <div class="milestone">
                         <div class="milestone-dot"></div>
                         <div class="milestone-num">75</div>
-                        <div class="milestone-label">Three quarters</div>
+                        <div class="milestone-label"></div>
                     </div>
                     <div class="milestone">
                         <div class="milestone-dot"></div>
                         <div class="milestone-num">90</div>
-                        <div class="milestone-label">Final 10</div>
+                        <div class="milestone-label">10 left</div>
                     </div>
-                    <div class="milestone active">
+                    <div class="milestone current">
                         <div class="milestone-dot"></div>
                         <div class="milestone-num">100</div>
-                        <div class="milestone-label">Complete</div>
+                        <div class="milestone-label">Yours?</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- =========================================
-         SLIDE 16 — THE INVITATION (MESSAGE IN A CAPSULE)
-         ========================================= -->
-    <section class="slide" data-slide="16">
-        <span class="section-num">12</span>
+    <!-- 9 — MESSAGE IN A CAPSULE -->
+    <section class="slide" data-slide="9">
+        <span class="section-num">06</span>
         <div class="slide-inner" style="align-items: center;">
             <div class="reveal">
                 <p class="label">Message in a capsule</p>
             </div>
             <div class="reveal">
-                <h2 style="max-width: 700px; margin-top: 1rem;">
-                    Reach out and make them feel <em>special</em><span class="accent-period">.</span>
+                <h2 style="max-width: 650px; margin-top: 1rem;">
+                    An invitation, from creators to <em>creators</em><span class="accent-period">.</span>
                 </h2>
             </div>
-            <div class="reveal" style="margin-top: 2rem;">
-                <div class="invite-card" style="background: var(--bg-card); box-shadow: 0 8px 40px rgba(0,0,0,0.08);">
-                    <div class="quote-mark">"</div>
-                    <p>If you've got a story worth telling, we invite you to be a founding creator — one of The First 100 — on capsules.ink.</p>
-                    <p class="quote-attr" style="margin-top: 0.5rem;">Podcast outro</p>
+            <div class="reveal" style="margin-top: 2rem; max-width: 600px;">
+                <div style="background: var(--bg-card); border-radius: 24px; padding: clamp(2rem, 3.5vw, 3rem); box-shadow: 0 8px 40px rgba(0,0,0,0.08);">
+                    <div style="font-family: var(--font-serif); font-size: 3rem; color: var(--accent-coral-deep); line-height: 0.5; margin-bottom: 0.8rem;">&ldquo;</div>
+                    <p style="font-family: var(--font-serif); font-size: clamp(1.1rem, 1.7vw, 1.5rem); font-style: italic; line-height: 1.5; color: var(--text-primary); margin: 0;">
+                        If you've got a story worth telling, we'd like to invite you to be one of The First 100 — on capsules.ink.
+                    </p>
+                    <p style="font-family: var(--font-sans); font-size: clamp(0.65rem, 0.8vw, 0.75rem); color: var(--text-55); margin-top: 1.2rem; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 500;">From a founding creator</p>
                 </div>
             </div>
-            <div class="reveal" style="margin-top: 1.5rem;">
-                <p style="font-size: clamp(0.85rem, 1vw, 0.95rem); color: var(--text-55); font-style: italic; font-family: var(--font-serif); text-align: center;">
-                    A video with the campaign capsule inviting them to join. An animation that opens from a capsule.
+            <div class="reveal">
+                <p style="margin-top: 1.5rem; font-size: clamp(0.85rem, 1vw, 0.95rem); color: var(--text-55); font-style: italic; font-family: var(--font-serif); text-align: center;">
+                    A video invitation that opens from a capsule. From us, to you.
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- =========================================
-         SLIDE 17 — WHERE WE BEGIN
-         ========================================= -->
-    <section class="slide slide-dark" data-slide="17">
-        <span class="section-num">13</span>
-        <div class="slide-inner">
-            <div class="reveal">
-                <p class="label">Where do we begin?</p>
-            </div>
-            <div class="reveal">
-                <h2 style="margin-top: 1rem; color: var(--text-on-dark); max-width: 700px;">
-                    No empty room. "<em>17 of 100</em>" is the story<span class="accent-period">.</span>
-                </h2>
-            </div>
-            <div class="reveal">
-                <p style="max-width: 650px; margin-top: 1.5rem;">
-                    We open with the gallery already alive — the capsules and founding creators we have, and the ones we're in talks with. Share their capsules to celebrate them being among the first, and inspire the next.
-                </p>
-            </div>
-            <div class="reveal">
-                <p style="max-width: 650px; margin-top: 1rem; font-weight: 500; color: var(--text-on-dark);">
-                    Each gets personalised posts to share with their audience, with their own numbered promo code.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- =========================================
-         SLIDE 18 — PLAN ON A PAGE
-         ========================================= -->
-    <section class="slide" data-slide="18">
-        <span class="section-num">14</span>
-        <div class="slide-inner">
-            <div class="reveal">
-                <p class="label">Plan on a page</p>
-            </div>
-            <div class="reveal">
-                <h2 style="margin-top: 1rem; margin-bottom: 1.5rem;">The whole campaign, in one <em>view</em><span class="accent-period">.</span></h2>
-            </div>
-            <div class="reveal">
-                <div class="plan-grid">
-                    <div class="plan-item"><div class="plan-label">Goal</div><div class="plan-value">100 paying Founding Creators. Start with 15–20; build the rest in public.</div></div>
-                    <div class="plan-item"><div class="plan-label">Insight</div><div class="plan-value">Storytellers want to tell their story beautifully. We give them the tool and the <em>platform</em>.</div></div>
-                    <div class="plan-item"><div class="plan-label">Who</div><div class="plan-value">Influential storytellers with wonder-full stories, ready to pioneer a new medium.</div></div>
-                    <div class="plan-item"><div class="plan-label">Ask</div><div class="plan-value">Create a capsule. Be one of the First 100.</div></div>
-                    <div class="plan-item"><div class="plan-label">Vehicle</div><div class="plan-value">The capsule itself. Promo for the platform, promo for Capsules, promo for their capsule.</div></div>
-                    <div class="plan-item"><div class="plan-label">Mechanic</div><div class="plan-value">A personal founder code: the paywall wearing a perk. Also our conversion metric.</div></div>
-                    <div class="plan-item"><div class="plan-label">Destination</div><div class="plan-value">One Hundred Wonders — a growing gallery of living stories.</div></div>
-                    <div class="plan-item"><div class="plan-label">Flywheel</div><div class="plan-value">Every creator brings an audience; every audience holds the next creator.</div></div>
-                    <div class="plan-item"><div class="plan-label">Rhythm</div><div class="plan-value">Building in public. Milestones at 25, 50, 75, the final 10, 100.</div></div>
-                    <div class="plan-item"><div class="plan-label">Finish</div><div class="plan-value">The gallery fills. We celebrate. Page filled. Digital, physical, IRL space.</div></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- =========================================
-         SLIDE 19 — WHEN WE REACH 100
-         ========================================= -->
-    <section class="slide slide-dark" data-slide="19">
+    <!-- 10 — THE EXPERIENCE -->
+    <section class="slide slide-dark" data-slide="10">
         <div class="slide-inner" style="align-items: center; text-align: center;">
             <div class="reveal">
-                <p class="label" style="margin-bottom: 1.5rem;">When we reach 100</p>
+                <p class="label" style="margin-bottom: 1.5rem;">The experience</p>
+            </div>
+            <div class="reveal">
+                <h1 style="font-size: clamp(2.2rem, 5vw, 3.8rem); max-width: 800px; color: var(--text-on-dark);">
+                    A wonder-filled space where <em>100 stories</em> come to life<span class="accent-period">.</span>
+                </h1>
+            </div>
+            <div class="reveal">
+                <p style="max-width: 580px; margin-top: 2rem; color: var(--text-on-dark-80); font-size: clamp(1rem, 1.4vw, 1.15rem);">
+                    Walk through them. Listen to them. Step inside. Every capsule is a world someone built — a story they couldn't keep inside.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 11 — WHEN IT'S FULL -->
+    <section class="slide slide-dark" data-slide="11">
+        <div class="slide-inner" style="align-items: center; text-align: center;">
+            <div class="reveal">
+                <p class="label" style="margin-bottom: 1.5rem;">When the gallery is full</p>
             </div>
             <div class="reveal">
                 <div class="big-number">100<span class="accent-period">.</span></div>
             </div>
             <div class="reveal">
-                <p style="max-width: 550px; margin-top: 1.5rem; color: var(--text-on-dark-80); font-size: clamp(1rem, 1.4vw, 1.2rem);">
-                    The gallery is full. Sold out. The founding cohort closes — 100, forever.
+                <p style="max-width: 520px; margin-top: 1.5rem; color: var(--text-on-dark-80); font-size: clamp(1rem, 1.4vw, 1.2rem);">
+                    The founding cohort closes — 100, forever.
                 </p>
             </div>
             <div class="reveal">
-                <p style="max-width: 550px; margin-top: 1rem; color: var(--text-on-dark-55);">
-                    We celebrate: One Hundred Wonders complete. The physical book. The physical exhibition. The art gallery.
+                <p style="max-width: 520px; margin-top: 0.8rem; color: var(--text-on-dark-55);">
+                    We celebrate with a physical book. An exhibition. An art gallery. The stories, preserved in a living container, for as long as the internet keeps running.
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- =========================================
-         SLIDE 20 — CTA: CLAIM YOUR SPOT
-         ========================================= -->
-    <section class="slide slide-dark" data-slide="20" style="text-align: center; align-items: center;">
+    <!-- 12 — THE FLYWHEEL (as poetic, not strategic) -->
+    <section class="slide slide-dark" data-slide="12">
+        <span class="section-num">07</span>
+        <div class="slide-inner" style="align-items: center; text-align: center;">
+            <div class="reveal">
+                <p class="label">The beautiful part</p>
+            </div>
+            <div class="reveal">
+                <h2 style="margin-top: 0.8rem; color: var(--text-on-dark); max-width: 680px;">
+                    Every story brings the <em>next one closer</em><span class="accent-period">.</span>
+                </h2>
+            </div>
+            <div class="reveal" style="margin-top: 2.5rem; max-width: 580px;">
+                <div style="display: flex; flex-direction: column; gap: clamp(1.2rem, 2.5vw, 2rem); align-items: center;">
+                    <p style="font-family: var(--font-serif); font-size: clamp(1.1rem, 1.7vw, 1.4rem); font-style: italic; color: var(--text-on-dark); line-height: 1.4; margin: 0; max-width: 500px;">
+                        Every founding creator brings their audience.
+                    </p>
+                    <span style="color: oklab(1 0 0 / 0.15); font-size: 1.2rem;">\2193</span>
+                    <p style="font-family: var(--font-serif); font-size: clamp(1.1rem, 1.7vw, 1.4rem); font-style: italic; color: var(--text-on-dark); line-height: 1.4; margin: 0; max-width: 500px;">
+                        Every audience holds the next storyteller.
+                    </p>
+                    <span style="color: oklab(1 0 0 / 0.15); font-size: 1.2rem;">\2193</span>
+                    <p style="font-family: var(--font-serif); font-size: clamp(1.1rem, 1.7vw, 1.4rem); font-style: italic; color: var(--text-on-dark); line-height: 1.4; margin: 0; max-width: 500px;">
+                        Every new capsule makes the gallery more <em>wonder-full</em>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 13 — CLAIM YOUR SPOT -->
+    <section class="slide slide-dark" data-slide="13" style="text-align: center; align-items: center;">
         <div class="slide-inner" style="align-items: center;">
             <div class="reveal">
                 <p class="label" style="margin-bottom: 1.5rem;">The First 100</p>
             </div>
             <div class="reveal">
                 <h1 style="font-size: clamp(3rem, 7vw, 5.5rem);">Claim your <em>spot</em><span class="accent-period">.</span></h1>
+            </div>
+            <div class="reveal">
+                <p style="max-width: 480px; margin-top: 1.5rem; color: var(--text-on-dark-55); font-size: clamp(0.95rem, 1.3vw, 1.1rem);">
+                    17 stories are already living in the gallery. 83 are waiting for the people who'll tell them.
+                </p>
             </div>
             <div class="reveal" style="margin-top: 2.5rem;">
                 <a href="https://capsules.ink" target="_blank" rel="noopener" style="text-decoration: none;">
@@ -1991,6 +1531,15 @@
                         <span>Be one of The First 100</span>
                     </div>
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 14 — CLOSE -->
+    <section class="slide slide-dark" data-slide="14" style="text-align: center; align-items: center;">
+        <div class="slide-inner" style="align-items: center;">
+            <div class="reveal">
+                <h1 style="font-size: clamp(3rem, 7vw, 5.5rem);">Where stories <em>live</em><span class="accent-period">.</span></h1>
             </div>
             <div class="reveal">
                 <div style="display: flex; align-items: flex-end; justify-content: center; gap: 2.5rem; margin-top: 3rem;">
@@ -2008,53 +1557,45 @@
     </section>
 
     <script>
-        // Intersection Observer for reveal animations
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                } else {
-                    entry.target.classList.remove('visible');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+                else entry.target.classList.remove('visible');
             });
         }, { threshold: 0.15 });
-
         document.querySelectorAll('.slide').forEach(slide => observer.observe(slide));
 
-        // Gallery grid — 100 slots, 17 filled
+        // Gallery — 17 filled, 82 empty, 1 "claim" slot
         const galleryGrid = document.getElementById('galleryGrid');
         if (galleryGrid) {
             for (let i = 0; i < 100; i++) {
                 const slot = document.createElement('div');
-                slot.className = i < 17 ? 'gallery-slot filled' : 'gallery-slot empty';
+                if (i < 17) slot.className = 'gallery-slot filled';
+                else if (i === 17) slot.className = 'gallery-slot claim';
+                else slot.className = 'gallery-slot empty';
                 galleryGrid.appendChild(slot);
             }
         }
 
-        // Update slide counter + progress bar
         const counter = document.getElementById('slideCounter');
         const bar = document.getElementById('progressBar');
         const slides = document.querySelectorAll('.slide');
         const total = slides.length;
-
         const counterObserver = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const num = parseInt(entry.target.dataset.slide);
                     counter.textContent = `${num} / ${total}`;
                     bar.style.width = `${(num / total) * 100}%`;
-
                     const isDark = entry.target.classList.contains('slide-dark');
                     const logo = document.querySelector('.deck-logo');
-                    if (isDark) { logo.classList.add('inverted'); } else { logo.classList.remove('inverted'); }
+                    if (isDark) logo.classList.add('inverted'); else logo.classList.remove('inverted');
                     counter.style.color = isDark ? 'rgba(255,255,255,0.5)' : '';
                 }
             });
         }, { threshold: 0.5 });
-
         slides.forEach(slide => counterObserver.observe(slide));
 
-        // Keyboard nav
         document.addEventListener('keydown', e => {
             const current = [...slides].findIndex(s => {
                 const rect = s.getBoundingClientRect();
@@ -2070,6 +1611,5 @@
             }
         });
     </script>
-
 </body>
 </html>
