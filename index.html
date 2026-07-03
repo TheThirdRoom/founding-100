@@ -984,9 +984,9 @@
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(10, 1fr);
-            gap: clamp(4px, 0.6vw, 8px);
+            gap: clamp(3px, 0.4vw, 5px);
             width: 100%;
-            max-width: 780px;
+            max-width: 520px;
             margin: 0 auto;
         }
 
@@ -999,6 +999,7 @@
             align-items: center;
             justify-content: center;
             transition: all 0.4s var(--ease-soft);
+            max-height: 4.2vw;
         }
 
         .gallery-slot.filled {
@@ -1031,20 +1032,20 @@
         .perk-list {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: clamp(0.6rem, 1.2vw, 1.2rem);
+            gap: clamp(0.3rem, 0.6vw, 0.6rem);
             list-style: none;
             padding: 0;
-            max-width: 760px;
+            max-width: 720px;
         }
 
         .perk-list li {
             display: flex;
             align-items: flex-start;
-            gap: 0.8rem;
-            font-size: clamp(0.85rem, 1.1vw, 1rem);
-            line-height: 1.5;
+            gap: 0.6rem;
+            font-size: clamp(0.78rem, 1vw, 0.92rem);
+            line-height: 1.4;
             color: var(--text-on-dark-80);
-            padding: 0.3rem 0;
+            padding: 0.15rem 0;
         }
 
         .perk-list li::before {
@@ -1275,22 +1276,22 @@
     <!-- 5 — ONE HUNDRED WONDERS (GALLERY) -->
     <section class="slide slide-dark" data-slide="5">
         <span class="section-num">02</span>
-        <div class="slide-inner" style="align-items: center; text-align: center;">
+        <div class="slide-inner" style="align-items: center; text-align: center; gap: 0.8rem;">
             <div class="reveal">
                 <p class="label">One Hundred Wonders</p>
             </div>
             <div class="reveal">
-                <h2 style="margin-top: 0.8rem; color: var(--text-on-dark); max-width: 700px;">
+                <h2 style="color: var(--text-on-dark); max-width: 600px; font-size: clamp(1.6rem, 3.5vw, 2.4rem);">
                     A living gallery of <em>100 stories</em><span class="accent-period">.</span>
                 </h2>
             </div>
-            <div class="reveal">
-                <p style="max-width: 580px; margin-top: 1rem; color: var(--text-on-dark-55); font-size: clamp(0.9rem, 1.2vw, 1.05rem);">
-                    100 capsules on display — living stories you can dive into, walk through, listen to, step into. It grows as each creator joins.
-                </p>
-            </div>
-            <div class="reveal" style="width: 100%; margin-top: 1.5rem;">
+            <div class="reveal" style="width: 100%; margin-top: 0.8rem;">
                 <div class="gallery-grid" id="galleryGrid"></div>
+            </div>
+            <div class="reveal">
+                <p style="color: var(--text-on-dark-55); font-size: clamp(0.8rem, 1vw, 0.9rem); margin-top: 0.5rem;">
+                    17 are alive. 83 are waiting.
+                </p>
             </div>
         </div>
     </section>
@@ -1298,16 +1299,16 @@
     <!-- 6 — WHAT YOU GET -->
     <section class="slide slide-dark" data-slide="6">
         <span class="section-num">03</span>
-        <div class="slide-inner">
+        <div class="slide-inner" style="gap: 0.6rem;">
             <div class="reveal">
                 <p class="label">What it means to be one of The First 100</p>
             </div>
             <div class="reveal">
-                <h2 style="margin-top: 1rem; color: var(--text-on-dark); max-width: 650px;">
+                <h2 style="color: var(--text-on-dark); max-width: 580px; font-size: clamp(1.5rem, 3vw, 2.2rem);">
                     Not just a tool. A <em>place</em> in something permanent<span class="accent-period">.</span>
                 </h2>
             </div>
-            <div class="reveal" style="margin-top: 1.5rem;">
+            <div class="reveal" style="margin-top: 0.8rem;">
                 <ul class="perk-list">
                     <li>Pioneer a <em>new storytelling medium</em></li>
                     <li>Support from founding creators to craft your capsule</li>
