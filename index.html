@@ -981,27 +981,34 @@
     
         /* F100 ADDITIONS */
 
-        /* ONE HUNDRED WONDERS — horizontal capsule gallery on a zooming canvas.
-           Every slot is a true 8:3 capsule, same geometry as the hero pill. */
-        .wonders-grid {
-            display: grid;
-            grid-template-columns: repeat(10, 1fr);
-            gap: clamp(4px, 0.5vw, 8px);
-            width: min(100%, 1200px, calc((100dvh - 29rem) * 8 / 3));
-            margin: 0 auto;
+        /* ONE HUNDRED WONDERS — scattered capsule collage.
+           Real capsule thumbnails scattered around a central title,
+           with remaining slots as small empty capsules carrying claim codes. */
+        .wonders-collage {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 56vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .slide.visible .wonders-grid {
-            animation: wonders-settle 1.8s var(--ease-soft);
+        .wonders-title {
+            font-family: var(--font-serif);
+            font-size: clamp(1.8rem, 4.5vw, 3.5rem);
+            font-weight: 400;
+            color: var(--text-on-dark);
+            text-align: center;
+            z-index: 1;
+            line-height: 1.05;
+            letter-spacing: -0.01em;
         }
 
-        @keyframes wonders-settle {
-            from { transform: scale(1.06); opacity: 0.4; }
-            to { transform: scale(1); opacity: 1; }
-        }
+        .wonders-title em { font-style: italic; }
 
         .wonder {
-            position: relative;
+            position: absolute;
             aspect-ratio: 8 / 3;
             border-radius: 999px;
             overflow: hidden;
@@ -1009,66 +1016,85 @@
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            transition: transform 0.35s var(--ease-soft), background 0.35s var(--ease-soft), border-color 0.35s var(--ease-soft);
+            transition: transform 0.4s var(--ease-soft), opacity 0.4s var(--ease-soft), z-index 0s;
         }
 
-        .wonder-code {
-            font-family: var(--font-mono);
-            font-size: clamp(0.3rem, 0.5vw, 0.44rem);
-            letter-spacing: 0.02em;
-            white-space: nowrap;
-            color: oklab(1 0 0 / 0.4);
-            transition: color 0.35s var(--ease-soft);
+        .wonder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .wonder .wonder-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 50%, oklab(0.145 0 0 / 0.55));
+            display: flex;
+            align-items: flex-end;
+            padding: 0.4rem 0.6rem;
+        }
+
+        .wonder-num {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: clamp(0.55rem, 0.9vw, 0.75rem);
+            color: oklab(1 0 0 / 0.85);
+        }
+
+        .wonder.filled {
+            border: 1.5px solid oklab(1 0 0 / 0.15);
+            opacity: 0;
+            animation: wonder-fade-in 0.6s var(--ease-soft) forwards;
+        }
+
+        .wonder.filled:hover {
+            transform: scale(1.6);
+            z-index: 10;
+        }
+
+        @keyframes wonder-fade-in {
+            from { opacity: 0; transform: translateY(10px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         .wonder.empty {
             background: oklab(1 0 0 / 0.04);
-            border: 1px solid oklab(1 0 0 / 0.12);
+            border: 1px solid oklab(1 0 0 / 0.1);
+            opacity: 0;
+            animation: wonder-fade-in 0.5s var(--ease-soft) forwards;
+        }
+
+        .wonder-code {
+            font-family: var(--font-mono);
+            font-size: clamp(0.28rem, 0.42vw, 0.38rem);
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+            color: oklab(1 0 0 / 0.35);
+            transition: color 0.35s var(--ease-soft);
         }
 
         .wonder.empty:hover {
-            transform: scale(2.1);
+            transform: scale(1.8);
             z-index: 5;
             background: var(--bg-darker);
-            border-color: oklab(1 0 0 / 0.45);
+            border-color: oklab(1 0 0 / 0.4);
         }
 
         .wonder.empty:hover .wonder-code { color: oklab(1 0 0 / 0.95); }
-
-        .wonder.filled { border: 1px solid oklab(1 0 0 / 0.1); }
-        .wonder.filled:hover { transform: scale(2.1); z-index: 5; }
-
-        .wonder-num {
-            position: relative;
-            z-index: 2;
-            font-family: var(--font-serif);
-            font-style: italic;
-            font-size: clamp(0.36rem, 0.62vw, 0.56rem);
-            color: oklab(0.145 0 0 / 0.55);
-        }
-
-        .wonder-video {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .wonder.video .wonder-num { color: oklab(1 0 0 / 0.85); }
-
-        .wonder.tint-lavender { background: linear-gradient(120deg, var(--accent-lavender-soft), var(--accent-lavender-deep)); }
-        .wonder.tint-blue { background: linear-gradient(120deg, var(--accent-blue-soft), var(--accent-blue-deep)); }
-        .wonder.tint-sage { background: linear-gradient(120deg, var(--accent-sage-soft), var(--accent-sage-deep)); }
-        .wonder.tint-cream { background: linear-gradient(120deg, var(--accent-cream-soft), var(--accent-cream-deep)); }
 
         .wonder.claim {
             background: var(--accent-coral-deep);
             border: 1px solid var(--accent-coral-deep);
         }
 
-        .wonder.claim .wonder-code { color: rgba(255, 255, 255, 0.92); }
-        .wonder.claim:hover { transform: scale(2.1); z-index: 5; }
+        .wonder.claim .wonder-code { color: rgba(255, 255, 255, 0.9); font-size: clamp(0.4rem, 0.6vw, 0.55rem); }
+        .wonder.claim:hover { transform: scale(1.8); z-index: 5; }
+
+        @media (max-width: 768px) {
+            .wonders-collage { min-height: 48vh; }
+            .wonders-title { font-size: 1.4rem; }
+        }
 
         .perk-list {
             display: grid;
@@ -1436,20 +1462,17 @@
     <!-- 5 — ONE HUNDRED WONDERS (GALLERY) -->
     <section class="slide slide-dark" id="s5" data-slide="5">
         <span class="section-num">02</span>
-        <div class="slide-inner" style="align-items: center; text-align: center; gap: 0.8rem;">
+        <div class="slide-inner" style="gap: 0.6rem;">
             <div class="reveal">
-                <p class="label">One Hundred Wonders</p>
+                <p class="label" style="text-align: center;">One Hundred Wonders</p>
+            </div>
+            <div class="reveal" style="flex: 1; width: 100%; min-height: 0;">
+                <div class="wonders-collage" id="wondersCollage">
+                    <p class="wonders-title" id="wondersTitle">One Hundred<br><em>Wonders</em><span class="accent-period">.</span></p>
+                </div>
             </div>
             <div class="reveal">
-                <h2 style="color: var(--text-on-dark); max-width: 600px; font-size: clamp(1.6rem, 3.5vw, 2.4rem);">
-                    A living gallery of <em>100 stories</em><span class="accent-period">.</span>
-                </h2>
-            </div>
-            <div class="reveal" style="width: 100%; margin-top: 0.8rem;">
-                <div class="wonders-grid" id="wondersGrid"></div>
-            </div>
-            <div class="reveal">
-                <p style="color: var(--text-on-dark-55); font-size: clamp(0.8rem, 1vw, 0.9rem); margin-top: 0.7rem;">
+                <p style="color: var(--text-on-dark-55); font-size: clamp(0.8rem, 1vw, 0.9rem); text-align: center;">
                     17 are alive. 83 are waiting, each holding a code. Find yours, claim it.
                 </p>
             </div>
@@ -1787,49 +1810,121 @@
         }, { threshold: 0.15 });
         document.querySelectorAll('.slide').forEach(slide => observer.observe(slide));
 
-        // One Hundred Wonders — 17 alive, 1 claimable next, 82 waiting with codes
-        const wondersGrid = document.getElementById('wondersGrid');
-        if (wondersGrid) {
+        // One Hundred Wonders — scattered capsule collage with real thumbnails
+        const wondersCollage = document.getElementById('wondersCollage');
+        if (wondersCollage) {
+            // Real capsule thumbnails from the explore page
+            const capsules = [
+                { href: 'https://app.capsules.ink/lina/kintsugi', img: 'https://assets.capsules.ink/capsule-embeds/e87eb362-f78a-410a-a948-6575090cd45e/9f12a7cf-f086-4de7-b3ee-afcedc63db40-embed-1779940138120.webp' },
+                { href: 'https://app.capsules.ink/rebeccagodfrey/adaptive-empathetic-intelligence', img: 'https://assets.capsules.ink/capsule-embeds/81fa55c9-dbee-4987-ab17-e487dee9d8b0/7b473ff0-7218-4c79-8816-de8fc6cbae82-embed-1767393919519.webp' },
+                { href: 'https://app.capsules.ink/timour/bhutan-and-the-blueprint-for-a-wise-city', img: null },
+                { href: 'https://app.capsules.ink/lina/bridging-the-digital-empathy-gap', img: 'https://assets.capsules.ink/capsule-embeds/e87eb362-f78a-410a-a948-6575090cd45e/949b5634-a31d-4af7-a6ed-166ab9bdafd9-embed-1780522815331.webp' },
+                { href: 'https://app.capsules.ink/lina/how-burning-man-taught-me-about-creativity', img: 'https://assets.capsules.ink/capsule-embeds/22d2a1e4-72bd-4877-b064-e4b8413010c3/c648c91c-a8bd-4097-876b-bbeda60b7af3-1775617555196-ra6GWRhy4hdM-HFG4qi_A.png' },
+                { href: 'https://app.capsules.ink/capsules-official/manifesto', img: 'https://assets.capsules.ink/capsule-embeds/e87eb362-f78a-410a-a948-6575090cd45e/19807b13-7600-439f-9114-bdc28fad666a-embed-1780698600643.webp' },
+                { href: 'https://app.capsules.ink/furniturebank/roots', img: 'https://assets.capsules.ink/capsule-embeds/82dfd146-a208-47ec-bbcd-ad0352950967/4cb62085-ea1d-437f-8df4-98ef781dc73e-embed-1781193343975.png' },
+                { href: 'https://app.capsules.ink/sara/relay-funder', img: 'https://assets.capsules.ink/capsule-embeds/88601478-2270-445d-8d86-eaf9f0833cc8/3b6f4604-6dca-498f-a0f4-b49a7a9a9e1f-embed-1764363694809.webp' },
+                { href: 'https://app.capsules.ink/makina/makina', img: 'https://assets.capsules.ink/capsule-embeds/cfda67ad-5f6f-424a-9bde-8fd74e0360e2/e842a91b-064a-4e2d-98d3-48749352b8d1-embed-1764358961453.webp' },
+                { href: 'https://app.capsules.ink/furniturebank/the-table-that-found-its-family', img: 'https://assets.capsules.ink/capsule-embeds/82dfd146-a208-47ec-bbcd-ad0352950967/2329b8d5-b2df-4b62-905c-fcd681cbf66b-1781097177215-wAeaip1yaHhGOJHahD97r.png' },
+                { href: 'https://app.capsules.ink/chibi-encapsulated/capsules-vision', img: 'https://assets.capsules.ink/capsule-embeds/1ea4e89f-df63-4570-89e3-8ccc9c7bb024/e686fb37-3371-47e7-a192-9809e62ad218-embed-1781532063940.webp' },
+                { href: 'https://app.capsules.ink/chibi-encapsulated/add-to-basket-self-expression', img: 'https://assets.capsules.ink/capsule-embeds/1ea4e89f-df63-4570-89e3-8ccc9c7bb024/5a80ebc8-0b8f-4742-b863-49aa58d9c485-embed-1780955184120.webp' },
+            ];
+
+            // Scattered positions for filled capsules (percentages within the collage container)
+            // Arranged around the central title, avoiding the center 30% zone
+            const positions = [
+                { top: '2%',  left: '3%',  w: '22%' },
+                { top: '4%',  left: '28%', w: '18%' },
+                { top: '2%',  left: '54%', w: '20%' },
+                { top: '4%',  left: '78%', w: '18%' },
+                { top: '22%', left: '1%',  w: '16%' },
+                { top: '24%', left: '82%', w: '16%' },
+                { top: '38%', left: '8%',  w: '14%' },
+                { top: '40%', left: '80%', w: '16%' },
+                { top: '58%', left: '2%',  w: '18%' },
+                { top: '56%', left: '78%', w: '16%' },
+                { top: '74%', left: '12%', w: '20%' },
+                { top: '76%', left: '64%', w: '22%' },
+            ];
+
+            // Add filled capsules with real thumbnails
+            capsules.forEach((cap, i) => {
+                const pos = positions[i] || positions[i % positions.length];
+                const el = document.createElement('a');
+                el.href = cap.href;
+                el.target = '_blank';
+                el.rel = 'noopener';
+                el.className = 'wonder filled';
+                el.style.cssText = `top: ${pos.top}; left: ${pos.left}; width: ${pos.w}; animation-delay: ${0.1 + i * 0.08}s;`;
+
+                if (cap.img) {
+                    const img = document.createElement('img');
+                    img.src = cap.img;
+                    img.loading = 'lazy';
+                    img.alt = '';
+                    el.appendChild(img);
+                } else {
+                    // Fallback: use video for capsules without a thumbnail
+                    const video = document.createElement('video');
+                    video.src = i % 2 === 0 ? 'assets/scene-9.mp4' : 'assets/scene-7.mp4';
+                    video.muted = true;
+                    video.loop = true;
+                    video.autoplay = true;
+                    video.playsInline = true;
+                    video.style.cssText = 'width:100%;height:100%;object-fit:cover;';
+                    el.appendChild(video);
+                }
+
+                const overlay = document.createElement('div');
+                overlay.className = 'wonder-overlay';
+                const num = document.createElement('span');
+                num.className = 'wonder-num';
+                num.textContent = `Nº ${i + 1}`;
+                overlay.appendChild(num);
+                el.appendChild(overlay);
+
+                wondersCollage.appendChild(el);
+            });
+
+            // Add empty capsules with claim codes scattered in remaining space
             const colors = ['sage', 'lavender', 'cream', 'blue', 'coral'];
             const objects = ['boat', 'lantern', 'clock', 'moon', 'harbor', 'letter', 'garden', 'candle', 'compass', 'river'];
             const animals = ['owl', 'crow', 'hawk', 'wren', 'heron', 'otter', 'hare', 'finch', 'moth', 'swan'];
-            const tints = ['lavender', 'blue', 'sage', 'cream'];
-            for (let i = 0; i < 100; i++) {
-                const n = i + 1;
-                if (i < 17) {
-                    const el = document.createElement('div');
-                    if (i === 0 || i === 8) {
-                        el.className = 'wonder filled video';
-                        const video = document.createElement('video');
-                        video.className = 'wonder-video';
-                        video.src = i === 0 ? 'assets/scene-9.mp4' : 'assets/scene-7.mp4';
-                        video.muted = true;
-                        video.loop = true;
-                        video.autoplay = true;
-                        video.playsInline = true;
-                        el.appendChild(video);
-                    } else {
-                        el.className = `wonder filled tint-${tints[i % tints.length]}`;
-                    }
-                    const num = document.createElement('span');
-                    num.className = 'wonder-num';
-                    num.textContent = `Nº ${n}`;
-                    el.appendChild(num);
-                    wondersGrid.appendChild(el);
-                } else {
-                    const el = document.createElement('a');
-                    el.href = 'https://capsules.ink';
-                    el.target = '_blank';
-                    el.rel = 'noopener';
-                    el.className = i === 17 ? 'wonder claim' : 'wonder empty';
-                    const code = document.createElement('span');
-                    code.className = 'wonder-code';
-                    const row = Math.floor(i / 10);
-                    code.textContent = i === 17 ? 'you?'
-                        : `First${n}${colors[(n + row * 2) % 5]}${objects[(n + row * 3) % 10]}${animals[(n + row) % 7]}`;
-                    el.appendChild(code);
-                    wondersGrid.appendChild(el);
-                }
+
+            // Scattered positions for empty capsules — smaller, filling gaps
+            const emptyPositions = [
+                { top: '14%', left: '20%', w: '7%' }, { top: '12%', left: '42%', w: '6%' },
+                { top: '16%', left: '68%', w: '6%' }, { top: '30%', left: '24%', w: '5%' },
+                { top: '32%', left: '60%', w: '6%' }, { top: '34%', left: '44%', w: '5%' },
+                { top: '48%', left: '20%', w: '6%' }, { top: '50%', left: '54%', w: '5%' },
+                { top: '52%', left: '38%', w: '6%' }, { top: '66%', left: '36%', w: '5%' },
+                { top: '68%', left: '56%', w: '6%' }, { top: '82%', left: '38%', w: '5%' },
+                { top: '84%', left: '58%', w: '6%' }, { top: '8%',  left: '48%', w: '5%' },
+                { top: '26%', left: '68%', w: '5%' }, { top: '44%', left: '72%', w: '5%' },
+                { top: '62%', left: '26%', w: '6%' }, { top: '72%', left: '48%', w: '5%' },
+            ];
+
+            for (let i = 0; i < 83; i++) {
+                const n = 18 + i; // Start numbering after filled capsules
+                const pos = emptyPositions[i % emptyPositions.length];
+                // Vary position slightly for repeats to avoid overlap
+                const jitterTop = (Math.floor(i / emptyPositions.length) * 3) % 10;
+                const jitterLeft = (Math.floor(i / emptyPositions.length) * 4) % 8;
+
+                const el = document.createElement('a');
+                el.href = 'https://capsules.ink';
+                el.target = '_blank';
+                el.rel = 'noopener';
+                el.className = i === 0 ? 'wonder claim' : 'wonder empty';
+                el.style.cssText = `top: calc(${pos.top} + ${jitterTop}%); left: calc(${pos.left} + ${jitterLeft}%); width: ${pos.w}; animation-delay: ${0.5 + i * 0.02}s;`;
+
+                const code = document.createElement('span');
+                code.className = 'wonder-code';
+                const row = Math.floor(i / 10);
+                code.textContent = i === 0 ? 'you?'
+                    : `First${n}${colors[(n + row * 2) % 5]}${objects[(n + row * 3) % 10]}${animals[(n + row) % 7]}`;
+                el.appendChild(code);
+
+                wondersCollage.appendChild(el);
             }
         }
 
