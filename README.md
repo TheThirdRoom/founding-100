@@ -10,7 +10,7 @@ Built on the same visual system as the [main Capsules deck](https://github.com/T
 
 ## Structure
 
-- **20 slides** — scroll-snap, keyboard nav (arrows / space)
-- Title capsule hero with video → Brief → Brand filter → Audience → Insight → Curation → The First 100 → Gallery → Vehicle → Channels → Flywheel → Codes → Perks → Milestones → Invitation → Where we begin → Plan on a page → 100 → CTA
+- **15 slides** — scroll-snap, keyboard nav (arrows / space)
+- Title capsule hero with video → Invitation → What's a capsule → The First 100 → One Hundred Wonders gallery → Perks → Personal codes → Milestones → Message in a capsule → The experience → Every surface → 100 → Flywheel → Claim your spot → Close
 - Same CSS design system as the parent deck
-- Gallery grid renders 100 capsule slots (17 filled as "current state")
+- One Hundred Wonders gallery renders 100 horizontal 8:3 capsules — 17 alive (accent tints + two live video slots), one coral "you?" claim slot, and 82 waiting slots each carrying a unique claim code; hover zooms a capsule up to read its code
