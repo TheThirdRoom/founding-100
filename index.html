@@ -1204,6 +1204,35 @@
 
         /* Phone frame (reuse existing .device-phone from shared CSS) */
 
+        /* ONE CAPSULE, EVERY SURFACE — responsive frame row */
+        .surface-row {
+            flex: 1;
+            min-height: 0;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(1.2rem, 3vw, 3rem);
+            margin-top: 0.5rem;
+        }
+
+        .surface-row .desktop-frame {
+            width: min(46vw, 560px);
+            flex-shrink: 1;
+            min-width: 0;
+        }
+
+        .surface-row .device-phone {
+            height: min(52vh, 480px);
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 760px) {
+            .surface-row { flex-direction: column; }
+            .surface-row .desktop-frame { width: min(86vw, 560px); }
+            .surface-row .device-phone { height: min(40vh, 420px); }
+        }
+
         .big-number {
             font-family: var(--font-serif);
             font-size: clamp(6rem, 14vw, 12rem);
@@ -1661,9 +1690,9 @@
                     A single link. <em>Everywhere</em> it goes<span class="accent-period">.</span>
                 </h2>
             </div>
-            <div class="reveal" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: clamp(1.5rem, 4vw, 3rem); margin-top: 0.5rem; min-height: 0;">
+            <div class="reveal surface-row">
                 <!-- Desktop -->
-                <div class="desktop-frame" style="width: min(50vw, 560px); align-self: center;">
+                <div class="desktop-frame">
                     <div class="frame-bar">
                         <span></span><span></span><span></span>
                     </div>
@@ -1672,7 +1701,7 @@
                     </div>
                 </div>
                 <!-- Phone -->
-                <div class="device-phone" style="height: 52vh; max-height: 480px; align-self: center;">
+                <div class="device-phone">
                     <div class="phone-screen" style="position: relative; overflow: hidden;">
                         <iframe src="https://app.capsules.ink/timour/bhutan-and-the-blueprint-for-a-wise-city" class="scale-iframe-phone" scrolling="auto" frameborder="0" loading="lazy"></iframe>
                     </div>
