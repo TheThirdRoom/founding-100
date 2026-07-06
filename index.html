@@ -981,22 +981,29 @@
     
         /* F100 ADDITIONS */
 
-        /* ONE HUNDRED WONDERS — scattered capsule collage.
-           Real capsule thumbnails scattered around a central title,
-           with remaining slots as small empty capsules carrying claim codes. */
-        .wonders-collage {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            min-height: 56vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* ONE HUNDRED WONDERS — ordered capsule mosaic.
+           A 12×18 grid where every cell is an 8:3 capsule: the serif title holds a
+           reserved 6×4 center block, the 12 real thumbnails span 3×3 cells placed
+           symmetrically around it, and the 84 claim capsules dense-fill the rest.
+           216 cells − 24 (title) − 108 (thumbnails) = 84 = 1 claim + 83 codes. */
+        .wonders-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: repeat(18, 1fr);
+            grid-auto-flow: dense;
+            gap: clamp(4px, 0.5vw, 8px);
+            width: min(100%, 1240px, calc((100dvh - 16rem) * 16 / 9));
+            aspect-ratio: 16 / 9;
+            margin: 0 auto;
         }
 
         .wonders-title {
+            grid-row: 8 / span 4;
+            grid-column: 4 / span 6;
+            align-self: center;
+            justify-self: center;
             font-family: var(--font-serif);
-            font-size: clamp(1.8rem, 4.5vw, 3.5rem);
+            font-size: clamp(1.8rem, 4vw, 3.2rem);
             font-weight: 400;
             color: var(--text-on-dark);
             text-align: center;
@@ -1008,8 +1015,7 @@
         .wonders-title em { font-style: italic; }
 
         .wonder {
-            position: absolute;
-            aspect-ratio: 8 / 3;
+            position: relative;
             border-radius: 999px;
             overflow: hidden;
             display: flex;
@@ -1017,6 +1023,11 @@
             justify-content: center;
             text-decoration: none;
             transition: transform 0.4s var(--ease-soft), opacity 0.4s var(--ease-soft), z-index 0s;
+        }
+
+        .wonder.filled {
+            grid-column: span 3;
+            grid-row: span 3;
         }
 
         .wonder img {
@@ -1092,8 +1103,8 @@
         .wonder.claim:hover { transform: scale(1.8); z-index: 5; }
 
         @media (max-width: 768px) {
-            .wonders-collage { min-height: 48vh; }
-            .wonders-title { font-size: 1.4rem; }
+            .wonders-title { font-size: 1.2rem; }
+            .wonder-code { display: none; }
         }
 
         .perk-list {
@@ -1495,8 +1506,8 @@
             <div class="reveal">
                 <p class="label" style="text-align: center;">One Hundred Wonders</p>
             </div>
-            <div class="reveal" style="flex: 1; width: 100%; min-height: 0;">
-                <div class="wonders-collage" id="wondersCollage">
+            <div class="reveal" style="flex: 1; width: 100%; min-height: 0; display: flex; align-items: center; justify-content: center;">
+                <div class="wonders-grid" id="wondersCollage">
                     <p class="wonders-title" id="wondersTitle">One Hundred<br><em>Wonders</em><span class="accent-period">.</span></p>
                 </div>
             </div>
@@ -1858,32 +1869,25 @@
                 { href: 'https://app.capsules.ink/chibi-encapsulated/add-to-basket-self-expression', img: 'https://assets.capsules.ink/capsule-embeds/1ea4e89f-df63-4570-89e3-8ccc9c7bb024/5a80ebc8-0b8f-4742-b863-49aa58d9c485-embed-1780955184120.webp' },
             ];
 
-            // Scattered positions for filled capsules (percentages within the collage container)
-            // Arranged around the central title, avoiding the center 30% zone
-            const positions = [
-                { top: '2%',  left: '3%',  w: '22%' },
-                { top: '4%',  left: '28%', w: '18%' },
-                { top: '2%',  left: '54%', w: '20%' },
-                { top: '4%',  left: '78%', w: '18%' },
-                { top: '22%', left: '1%',  w: '16%' },
-                { top: '24%', left: '82%', w: '16%' },
-                { top: '38%', left: '8%',  w: '14%' },
-                { top: '40%', left: '80%', w: '16%' },
-                { top: '58%', left: '2%',  w: '18%' },
-                { top: '56%', left: '78%', w: '16%' },
-                { top: '74%', left: '12%', w: '20%' },
-                { top: '76%', left: '64%', w: '22%' },
+            // Grid placements for the 12 thumbnails: [rowStart, colStart], each spans 3×3.
+            // Symmetric around the reserved title block (rows 8-11, cols 4-9).
+            const placements = [
+                [1, 2], [1, 8],
+                [4, 1], [4, 5], [4, 10],
+                [8, 1], [9, 10],
+                [12, 3], [12, 8],
+                [15, 1], [16, 5], [15, 10],
             ];
 
             // Add filled capsules with real thumbnails
             capsules.forEach((cap, i) => {
-                const pos = positions[i] || positions[i % positions.length];
+                const [row, col] = placements[i % placements.length];
                 const el = document.createElement('a');
                 el.href = cap.href;
                 el.target = '_blank';
                 el.rel = 'noopener';
                 el.className = 'wonder filled';
-                el.style.cssText = `top: ${pos.top}; left: ${pos.left}; width: ${pos.w}; animation-delay: ${0.1 + i * 0.08}s;`;
+                el.style.cssText = `grid-row: ${row} / span 3; grid-column: ${col} / span 3; animation-delay: ${0.1 + i * 0.08}s;`;
 
                 if (cap.img) {
                     const img = document.createElement('img');
@@ -1919,32 +1923,16 @@
             const objects = ['boat', 'lantern', 'clock', 'moon', 'harbor', 'letter', 'garden', 'candle', 'compass', 'river'];
             const animals = ['owl', 'crow', 'hawk', 'wren', 'heron', 'otter', 'hare', 'finch', 'moth', 'swan'];
 
-            // Scattered positions for empty capsules — smaller, filling gaps
-            const emptyPositions = [
-                { top: '14%', left: '20%', w: '7%' }, { top: '12%', left: '42%', w: '6%' },
-                { top: '16%', left: '68%', w: '6%' }, { top: '30%', left: '24%', w: '5%' },
-                { top: '32%', left: '60%', w: '6%' }, { top: '34%', left: '44%', w: '5%' },
-                { top: '48%', left: '20%', w: '6%' }, { top: '50%', left: '54%', w: '5%' },
-                { top: '52%', left: '38%', w: '6%' }, { top: '66%', left: '36%', w: '5%' },
-                { top: '68%', left: '56%', w: '6%' }, { top: '82%', left: '38%', w: '5%' },
-                { top: '84%', left: '58%', w: '6%' }, { top: '8%',  left: '48%', w: '5%' },
-                { top: '26%', left: '68%', w: '5%' }, { top: '44%', left: '72%', w: '5%' },
-                { top: '62%', left: '26%', w: '6%' }, { top: '72%', left: '48%', w: '5%' },
-            ];
-
-            for (let i = 0; i < 83; i++) {
-                const n = 18 + i; // Start numbering after filled capsules
-                const pos = emptyPositions[i % emptyPositions.length];
-                // Vary position slightly for repeats to avoid overlap
-                const jitterTop = (Math.floor(i / emptyPositions.length) * 3) % 10;
-                const jitterLeft = (Math.floor(i / emptyPositions.length) * 4) % 8;
+            // The 84 remaining capsules (1 claim + 83 codes) dense-flow into every free cell
+            for (let i = 0; i < 84; i++) {
+                const n = 17 + i; // Numbering continues after the filled capsules
 
                 const el = document.createElement('a');
                 el.href = 'https://capsules.ink';
                 el.target = '_blank';
                 el.rel = 'noopener';
                 el.className = i === 0 ? 'wonder claim' : 'wonder empty';
-                el.style.cssText = `top: calc(${pos.top} + ${jitterTop}%); left: calc(${pos.left} + ${jitterLeft}%); width: ${pos.w}; animation-delay: ${0.5 + i * 0.02}s;`;
+                el.style.cssText = `animation-delay: ${0.5 + i * 0.015}s;`;
 
                 const code = document.createElement('span');
                 code.className = 'wonder-code';
