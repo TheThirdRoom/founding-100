@@ -1102,6 +1102,25 @@
         .wonder.claim .wonder-code { color: rgba(255, 255, 255, 0.9); font-size: clamp(0.4rem, 0.6vw, 0.55rem); }
         .wonder.claim:hover { transform: scale(1.8); z-index: 5; }
 
+        /* Living capsules beyond the twelve thumbnails: small accent-tint markers */
+        .wonder.alive {
+            border: 1px solid oklab(1 0 0 / 0.12);
+            opacity: 0;
+            animation: wonder-fade-in 0.5s var(--ease-soft) forwards;
+        }
+
+        .wonder.alive .wonder-num {
+            font-size: clamp(0.34rem, 0.55vw, 0.5rem);
+            color: oklab(0.145 0 0 / 0.6);
+        }
+
+        .wonder.alive:hover { transform: scale(1.8); z-index: 5; }
+
+        .wonder.tint-lavender { background: linear-gradient(120deg, var(--accent-lavender-soft), var(--accent-lavender-deep)); }
+        .wonder.tint-blue { background: linear-gradient(120deg, var(--accent-blue-soft), var(--accent-blue-deep)); }
+        .wonder.tint-sage { background: linear-gradient(120deg, var(--accent-sage-soft), var(--accent-sage-deep)); }
+        .wonder.tint-cream { background: linear-gradient(120deg, var(--accent-cream-soft), var(--accent-cream-deep)); }
+
         @media (max-width: 768px) {
             .wonders-title { font-size: 1.2rem; }
             .wonder-code { display: none; }
@@ -1977,9 +1996,26 @@
             const objects = ['boat', 'lantern', 'clock', 'moon', 'harbor', 'letter', 'garden', 'candle', 'compass', 'river'];
             const animals = ['owl', 'crow', 'hawk', 'wren', 'heron', 'otter', 'hare', 'finch', 'moth', 'swan'];
 
-            // The 84 remaining capsules (1 claim + 83 codes) dense-flow into every free cell
+            // The 84 small capsules dense-flow into every free cell: the five living
+            // stories beyond the twelve thumbnails (Nº 13-17, accent tints), one
+            // claimable spot, and 78 waiting codes.
+            const aliveAt = new Set([10, 25, 40, 55, 70]);
+            const tints = ['lavender', 'blue', 'sage', 'cream', 'lavender'];
+            let aliveCount = 0;
+            let codeCount = 0;
             for (let i = 0; i < 84; i++) {
-                const n = 17 + i; // Numbering continues after the filled capsules
+                if (aliveAt.has(i)) {
+                    const el = document.createElement('div');
+                    el.className = `wonder alive tint-${tints[aliveCount]}`;
+                    el.style.cssText = `animation-delay: ${0.5 + i * 0.015}s;`;
+                    const num = document.createElement('span');
+                    num.className = 'wonder-num';
+                    num.textContent = `Nº ${13 + aliveCount}`;
+                    el.appendChild(num);
+                    wondersCollage.appendChild(el);
+                    aliveCount++;
+                    continue;
+                }
 
                 const el = document.createElement('a');
                 el.href = 'https://capsules.ink';
@@ -1990,9 +2026,14 @@
 
                 const code = document.createElement('span');
                 code.className = 'wonder-code';
-                const row = Math.floor(i / 10);
-                code.textContent = i === 0 ? 'you?'
-                    : `First${n}${colors[(n + row * 2) % 5]}${objects[(n + row * 3) % 10]}${animals[(n + row) % 7]}`;
+                if (i === 0) {
+                    code.textContent = 'you?';
+                } else {
+                    const n = 18 + codeCount;
+                    const row = Math.floor(i / 10);
+                    code.textContent = `First${n}${colors[(n + row * 2) % 5]}${objects[(n + row * 3) % 10]}${animals[(n + row) % 7]}`;
+                    codeCount++;
+                }
                 el.appendChild(code);
 
                 wondersCollage.appendChild(el);
