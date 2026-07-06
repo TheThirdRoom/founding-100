@@ -1223,15 +1223,34 @@
             min-width: 0;
         }
 
+        /* Width derived from height so the 390×844 screen fills the bezel exactly
+           (12px padding on each side) — no letterboxing inside the frame. */
         .surface-row .device-phone {
-            height: min(52vh, 480px);
+            --phone-h: min(52vh, 480px);
+            height: var(--phone-h);
+            width: calc((var(--phone-h) - 24px) * 390 / 844 + 24px);
             flex-shrink: 0;
+            position: relative;
+        }
+
+        /* Dynamic island */
+        .surface-row .device-phone::after {
+            content: "";
+            position: absolute;
+            top: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 26%;
+            height: 14px;
+            border-radius: 999px;
+            background: #1a1a1a;
+            z-index: 2;
         }
 
         @media (max-width: 760px) {
             .surface-row { flex-direction: column; }
             .surface-row .desktop-frame { width: min(86vw, 560px); }
-            .surface-row .device-phone { height: min(40vh, 420px); }
+            .surface-row .device-phone { --phone-h: min(40vh, 420px); }
         }
 
         .big-number {
