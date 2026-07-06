@@ -1323,13 +1323,25 @@
         .code-capsule:nth-child(4)::before { background: var(--accent-blue-soft); }
 
         .milestone-row {
+            position: relative;
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
             gap: clamp(0.5rem, 1vw, 1rem);
-            margin-top: 2rem;
+            margin: 2rem auto 0;
             width: 100%;
             max-width: 720px;
+        }
+
+        /* Track line connecting the milestone dots */
+        .milestone-row::before {
+            content: "";
+            position: absolute;
+            top: clamp(5px, 0.6vw, 8px);
+            left: 8%;
+            right: 8%;
+            height: 1px;
+            background: oklab(1 0 0 / 0.15);
         }
 
         .milestone {
