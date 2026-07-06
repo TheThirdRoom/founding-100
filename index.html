@@ -1107,43 +1107,33 @@
             .wonder-code { display: none; }
         }
 
-        .perk-list {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: clamp(0.3rem, 0.6vw, 0.6rem);
-            list-style: none;
-            padding: 0;
-            max-width: 720px;
-            margin: 0 auto;
-        }
-
-        .perk-list li {
-            position: relative;
-            font-size: clamp(0.78rem, 1vw, 0.92rem);
-            line-height: 1.4;
-            color: var(--text-on-dark-80);
-            padding: 0.15rem 0 0.15rem 1.2rem;
+        /* PERK CARDS */
+        .perk-cards {
+            max-width: 1000px;
+            width: 100%;
+            margin: 1rem auto 0;
             text-align: left;
         }
 
-        .perk-list li::before {
-            content: "\00B7";
-            position: absolute;
-            left: 0.1rem;
-            top: 0;
-            font-family: var(--font-serif);
-            font-size: 1.5rem;
-            color: var(--accent-coral-deep);
-            line-height: 1.2;
+        .perk-cards .card {
+            padding: clamp(1rem, 1.6vw, 1.4rem);
+            justify-content: center;
         }
 
-        .perk-list li em { font-style: italic; color: var(--text-on-dark); }
+        .perk-cards .card p {
+            color: var(--text-on-dark-80);
+            font-size: clamp(0.82rem, 1vw, 0.95rem);
+            line-height: 1.5;
+        }
 
-        /* Last perk spans both columns — it's long and would otherwise fragment */
-        .perk-list li.perk-full {
+        .perk-cards .card p em { font-style: italic; color: var(--text-on-dark); }
+
+        .perk-cards .card-full {
             grid-column: 1 / -1;
-            max-width: 680px;
-            justify-self: center;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
 
         /* Full-bleed capsule embed */
@@ -1391,7 +1381,6 @@
         }
 
         @media (max-width: 768px) {
-            .perk-list { grid-template-columns: 1fr; }
             .code-capsule { width: clamp(200px, 70vw, 260px); }
             .milestone-row { flex-direction: column; gap: 1rem; }
         }
@@ -1531,19 +1520,19 @@
                     Not just a tool. A <em>place</em> in something permanent<span class="accent-period">.</span>
                 </h2>
             </div>
-            <div class="reveal" style="margin-top: 0.8rem;">
-                <ul class="perk-list">
-                    <li>Pioneer a <em>new storytelling medium</em></li>
-                    <li>Support from founding creators to craft your capsule</li>
-                    <li>Your first capsule, <em>free</em></li>
-                    <li>A special founding-creator discount</li>
-                    <li>Promoted across all our channels</li>
-                    <li>Guest on our <em>podcast</em></li>
-                    <li>The First 100 badge</li>
-                    <li>Early access to everything we build</li>
-                    <li>A say in where the product goes</li>
-                    <li class="perk-full">Your story in the <em>One Hundred Wonders</em> gallery. On the page, on the wall, and in a physical book</li>
-                </ul>
+            <div class="reveal" style="margin-top: 0.8rem; width: 100%;">
+                <div class="card-grid perk-cards">
+                    <div class="card"><p>Pioneer a <em>new storytelling medium</em></p></div>
+                    <div class="card"><p>Support from founding creators to craft your capsule</p></div>
+                    <div class="card"><p>Your first capsule, <em>free</em></p></div>
+                    <div class="card"><p>A special founding-creator discount</p></div>
+                    <div class="card"><p>Promoted across all our channels</p></div>
+                    <div class="card"><p>Guest on our <em>podcast</em></p></div>
+                    <div class="card"><p>The First 100 badge</p></div>
+                    <div class="card"><p>Early access to everything we build</p></div>
+                    <div class="card"><p>A say in where the product goes</p></div>
+                    <div class="card card-full"><p>Your story in the <em>One Hundred Wonders</em> gallery. On the page, on the wall, and in a physical book</p></div>
+                </div>
             </div>
         </div>
     </section>
